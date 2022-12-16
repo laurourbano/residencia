@@ -1,9 +1,7 @@
-import { Pessoa } from "./pessoa";
+import { Pessoa } from "./Pessoa.js";
 
-export class Funcionario {
-  constructor(
-    private salario: number
-  ) { }
+export class Funcionario extends Pessoa {
+
 
 
 }
