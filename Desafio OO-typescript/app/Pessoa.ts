@@ -6,5 +6,4 @@ export class Pessoa {
     private telefone: string
   ) { }
 
-
 };
