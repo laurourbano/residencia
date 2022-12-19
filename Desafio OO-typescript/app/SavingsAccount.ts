@@ -6,19 +6,19 @@ export default class SavingsAccount extends Account {
         private profitability: number
     ) {
         super(numero)
-        this.profitability = profitability
     }
-
-    calculateIncome(): number {
+    //rendimento
+    calculateYield(): number {
         return 1
     };
-
+    //saldo
     calculateBalance(): number {
         return 1
     };
     //implementados de Conta
+    //deposita
     deposit(): void { };
-
+    //saca
     withdraw(): void { };
 
     //instance

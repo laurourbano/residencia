@@ -3,8 +3,6 @@ export default class Job {
         this.name = name;
     }
 
-    getJob() {
-        let job = new Job("job")
-        return job
-    }
+    job = new Job("bancário")
+    
 };

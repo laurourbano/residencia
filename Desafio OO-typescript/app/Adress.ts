@@ -1,4 +1,5 @@
 export default class Adress {
+
     constructor(
         private zipCode: string,
         private publicPlace: string,
@@ -9,10 +10,9 @@ export default class Adress {
     ) { };
 
     adress = new Adress('zipCode', 'publicPlace', 'number', 'complement', 'city', 'state')
-
     //por enquanto void, por não saber o retorno
-    resgisterAdress(): void {
-
+    resgisterAdress(adress: Adress): void {
+        console.log(adress)
     };
 
 };
