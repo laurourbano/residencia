@@ -11,7 +11,8 @@ class Adress {
         this.adress = new Adress('zipCode', 'publicPlace', 'number', 'complement', 'city', 'state');
     }
     ;
-    resgisterAdress() {
+    resgisterAdress(adress) {
+        console.log(adress);
     }
     ;
 }

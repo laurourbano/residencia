@@ -9,7 +9,6 @@ class CheckingAccount extends Account_1.default {
         super(numero);
         this.limit = limit;
         this.checking = new CheckingAccount('001', 1000);
-        this.limit = limit;
     }
     transfer(amount) { }
     calculateBalance() {

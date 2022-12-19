@@ -5,8 +5,6 @@ class Credit {
         this.amount = amount;
         this.date = date;
         this.credit = new Credit(1000, new Date());
-        this.amount = amount;
-        this.date = date;
     }
 }
 exports.default = Credit;

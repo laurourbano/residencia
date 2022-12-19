@@ -9,9 +9,8 @@ class SavingsAccount extends Account_1.default {
         super(numero);
         this.profitability = profitability;
         this.savings = new SavingsAccount('002', 0.05);
-        this.profitability = profitability;
     }
-    calculateIncome() {
+    calculateYield() {
         return 1;
     }
     ;
