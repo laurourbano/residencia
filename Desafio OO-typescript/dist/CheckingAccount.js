@@ -3,8 +3,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const Account_1 = __importDefault(require("./Account"));
-class CheckingAccount extends Account_1.default {
+const Account_js_1 = __importDefault(require("./Account.js"));
+class CheckingAccount extends Account_js_1.default {
     constructor(numero, limit) {
         super(numero);
         this.limit = limit;
