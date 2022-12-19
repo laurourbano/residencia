@@ -8,11 +8,13 @@ class Adress {
         this.complement = complement;
         this.city = city;
         this.state = state;
-        this.adress = new Adress('zipCode', 'publicPlace', 'number', 'complement', 'city', 'state');
+        this.arrayAdress = [];
     }
     ;
     resgisterAdress(adress) {
+        adress = new Adress('80000-000', 'Avenida São Paulo', '1000', 'apto a1', 'Santo André', 'São Paulo');
         console.log(adress);
+        return this.arrayAdress;
     }
     ;
 }

@@ -3,7 +3,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 class Job {
     constructor(name) {
         this.name = name;
-        this.job = new Job("bancário");
+        this.gerente = new Job("gerente");
+        this.atendente = new Job("atendente");
         this.name = name;
     }
 }

@@ -1,4 +1,5 @@
 export default class Adress {
+    private arrayAdress: Array<Adress>
 
     constructor(
         private zipCode: string,
@@ -6,13 +7,15 @@ export default class Adress {
         private number: string,
         private complement: string,
         private city: string,
-        private state: string
-    ) { };
+        private state: string,
+    ) { this.arrayAdress = [] };
 
-    adress = new Adress('zipCode', 'publicPlace', 'number', 'complement', 'city', 'state')
     //por enquanto void, por não saber o retorno
-    resgisterAdress(adress: Adress): void {
+    resgisterAdress(adress: Adress): Array<Adress> {
+
+        adress = new Adress('80000-000', 'Avenida São Paulo', '1000', 'apto a1', 'Santo André', 'São Paulo')
         console.log(adress)
+        return this.arrayAdress
     };
 
 };

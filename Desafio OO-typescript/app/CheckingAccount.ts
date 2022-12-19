@@ -1,4 +1,4 @@
-import Account from "./Account";
+import Account from "./Account.js";
 
 export default class CheckingAccount extends Account {
 
@@ -8,7 +8,7 @@ export default class CheckingAccount extends Account {
     ) {
         super(numero)
     }
-    
+
     //transferir
     transfer(
         //Conta: contaDestino,
