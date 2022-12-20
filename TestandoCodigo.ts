@@ -30,51 +30,45 @@ export class Funcionario extends Pessoa implements IUsuario {
         readonly cpf: string,
         readonly telefone: string,
         readonly cargo: Cargo,
-        readonly salario: number,
     ) {
         super(
             nome,
             cpf,
             telefone
-        )
-        //???
-        salario = 0
-        console.log(cargo.atendente.nome)
+        );
     }
     autenticar(ehvalido: boolean) {
-        ehvalido = true
-        return ehvalido
-    }
-}
+        ehvalido = true;
+        return ehvalido;
+    };
+};
 
 export class Cargo {
     constructor(
         readonly nome: string,
         readonly salario: number
-    ) { }
-    atendente = new Cargo("atendente", 2_000)
-    gerente = new Cargo('gerente', 5_000)
-}
+    ) { };
+};
 
 export interface IUsuario {
     autenticar(ehvalido: boolean): boolean;
-}
+};
 
 //--------------------------------------------------------------------//
 
 export abstract class Conta {
-    constructor(protected numeroDaConta: string) { }
+    constructor(protected numeroDaConta: string) { };
     criarConta(numeroDaConta: string) {
-        this.criaNumeroDaConta(numeroDaConta)
-    }
+        this.criaNumeroDaConta(numeroDaConta);
+    };;
     criaNumeroDaConta(stringNumeroDaConta: string) {
-        let contaNumero = 1
-        contaNumero = Number(this.numeroDaConta)
-        contaNumero++
-        stringNumeroDaConta = contaNumero.toString()
+        let contaNumero = 1;
+        contaNumero = Number(this.numeroDaConta);
+        contaNumero++;
+        stringNumeroDaConta = contaNumero.toString();
 
-        console.log(contaNumero)
-    }
+        console.log(contaNumero);
+    };
     abstract depositar(
         numeroDaConta: string,
         saldo: number,
@@ -85,21 +79,23 @@ export abstract class Conta {
         saldo: number,
         valor: number
     ): number | string;
-}
+};
 
 export class contaCorrente extends Conta {
     constructor(
         readonly numeroDaConta: string,
         private limite: number,
+        cliente: Cliente
     ) {
         super(numeroDaConta);
+        cliente
     }
     getLimite() {
-        return this.limite
-    }
+        return this.limite;
+    };
     setLimite(limite: number) {
-        this.limite = limite
-    }
+        this.limite = limite;
+    };
 
     depositar(
         numeroDaConta: string,
@@ -107,7 +103,7 @@ export class contaCorrente extends Conta {
         valor: number,
     ) {
         return saldo += valor;
-    }
+    };
     sacar(
         numeroDaConta: string,
         saldo: number,
@@ -115,11 +111,11 @@ export class contaCorrente extends Conta {
     ): number | string {
         if (valor < saldo) {
             saldo = saldo - valor;
-            return saldo
+            return saldo;
         } else {
             return `Não foi possível realizar o saque, seu saldo de ${saldo} é menor que a quantia de ${valor}, que foi solicitada`;
-        }
-    }
+        };
+    };
     tranferir(
         numeroDaConta: string,
         contaDestino: Conta,
@@ -129,25 +125,27 @@ export class contaCorrente extends Conta {
             saldo = saldo - valor;
         } else {
             return `Não foi possível realizar a transferência, seu saldo de ${saldo} é menor que a quantia de ${valor}, que foi solicitada`;
-        }
+        };
         return saldo;
-    }
+    };
 }
 
 export class contaPoupanca extends Conta {
     constructor(
         numeroDaConta: string,
-        rendimento: number = 0.01
+        rendimento: number = 0.01,
+        cliente: Cliente
     ) {
         super(numeroDaConta);
-    }
+        cliente
+    };
     depositar(
         numeroDaConta: string,
         saldo: number,
         valor: number,
     ) {
         return saldo += valor;
-    }
+    };
     sacar(
         numeroDaConta: string,
         saldo: number,
@@ -158,7 +156,6 @@ export class contaPoupanca extends Conta {
             return saldo
         } else {
             return `Não foi possível realizar a transferência, seu saldo de ${saldo} é menor que a quantia de ${valor}, que foi solicitada`;
-        }
-    }
-}
-
+        };
+    };
+};

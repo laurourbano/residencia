@@ -1,2 +1,25 @@
 "use strict";
-console.log('it works');
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const Cargo_js_1 = __importDefault(require("./Cargo.js"));
+const Cliente_js_1 = __importDefault(require("./Cliente.js"));
+const ContaCorrente_js_1 = __importDefault(require("./ContaCorrente.js"));
+const ContaPoupanca_js_1 = __importDefault(require("./ContaPoupanca.js"));
+const Endereco_js_1 = __importDefault(require("./Endereco.js"));
+const Funcionario_js_1 = __importDefault(require("./Funcionario.js"));
+const atendente = new Cargo_js_1.default('atendente', 2000);
+const gerente = new Cargo_js_1.default('gerente', 5000);
+const funcionario1 = new Funcionario_js_1.default('Flavio', '000.000.000-01', '(41)97777-9999', atendente);
+const funcionario2 = new Funcionario_js_1.default('Fulvio', '111.111.111-00', '(41)96666-9999', gerente);
+const endereco1 = new Endereco_js_1.default('0', '1', '0', '0', '0', '0');
+const endereco2 = new Endereco_js_1.default('0', '0', '0', '0', '0', '2');
+const cliente1 = new Cliente_js_1.default("000.000.000-00", "Euclides Cunha", "(41)99999-9999", true, endereco1);
+const cliente2 = new Cliente_js_1.default("000.000.000-00", "Carlos Jucá", "(41)98888-9999", true, endereco2);
+const conta1 = new ContaCorrente_js_1.default('001', 1000, cliente1);
+const conta2 = new ContaPoupanca_js_1.default('002', 0.05, cliente1);
+const conta3 = new ContaCorrente_js_1.default('003', 2000, cliente2);
+const conta4 = new ContaPoupanca_js_1.default('004', 0.05, cliente2);
+conta2.depositar(100);
+console.log(`O saldo da conta ${conta2} é ${conta2.saldo}`);

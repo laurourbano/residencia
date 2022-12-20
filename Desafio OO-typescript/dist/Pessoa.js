@@ -1,10 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 class People {
-    constructor(cpf, name, telephone) {
+    constructor(cpf, nome, telefone) {
         this.cpf = cpf;
-        this.name = name;
-        this.telephone = telephone;
+        this.nome = nome;
+        this.telefone = telefone;
     }
 }
 exports.default = People;
