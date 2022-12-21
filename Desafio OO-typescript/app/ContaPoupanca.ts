@@ -32,7 +32,7 @@ export default class ContaPoupanca extends Conta {
         }
         console.log(`
 DEPÓSITO PROCESSADO
-        Conta: ${this.numeroDaConta}
+        Conta Poupança: ${this.numeroDaConta}
         Nome: ${this.cliente.nome}
         -----------------------------
         Depósito de: R$ ${valor.toFixed(2)}
@@ -49,7 +49,7 @@ DEPÓSITO PROCESSADO
         } else {
             console.log(`
 SAQUE PROCESSADO
-        Conta: ${this.numeroDaConta}
+        Conta Poupança: ${this.numeroDaConta}
         Nome: ${this.cliente.nome}
         -----------------------------
         Saldo Anterior: ${this.saldo.toFixed(2)}

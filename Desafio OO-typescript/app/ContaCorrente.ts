@@ -54,7 +54,7 @@ TRANFERENCIA EFETUADA COM SUCESSO.
         }
         console.log(`
 DEPÓSITO PROCESSADO
-        Conta: ${this.numeroDaConta}
+        Conta Corrente: ${this.numeroDaConta}
         Nome: ${this.cliente.nome}
         Depósito de: R$ ${valor.toFixed(2)}
         -----------------------------
@@ -68,7 +68,7 @@ DEPÓSITO PROCESSADO
         } else {
             console.log(`
 SAQUE PROCESSADO
-        Conta: ${this.numeroDaConta}
+        Conta Corrente: ${this.numeroDaConta}
         Nome: ${this.cliente.nome}
         -----------------------------
         Saldo Anterior: ${this.saldo.toFixed(2)}
