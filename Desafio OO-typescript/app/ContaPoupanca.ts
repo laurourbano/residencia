@@ -3,7 +3,7 @@ import Conta from "./Conta"
 
 export default class ContaPoupanca extends Conta {
     public rentabilidadeMensal: number
-    public cliente: Cliente = new Cliente()
+    public cliente: Cliente
     public saldo: number = 0
     public valor: number = 0
 
@@ -30,16 +30,36 @@ export default class ContaPoupanca extends Conta {
         } else {
             this.saldo = valor
         }
-        console.log(`Saldo atual R$ ${this.saldo}`)
+        console.log(`
+DEPÓSITO PROCESSADO
+        Conta: ${this.numeroDaConta}
+        Nome: ${this.cliente.nome}
+        -----------------------------
+        Depósito de: R$ ${valor.toFixed(2)}
+        -----------------------------
+        Saldo atual de: R$ ${this.saldo.toFixed(2)}
+        `)
     };
     //saca
     sacar(valor: number): void {
         if (this.saldo < valor) {
-            console.log(`Não é possível sacar R$ ${valor}, pois seu saldo de R$ ${this.saldo} é insuficiente. Reinicie a operação.`)
+            console.log(`
+            Não é possível sacar R$ ${valor.toFixed(2)}, pois seu saldo é de R$ ${this.saldo.toFixed(2)}. Reinicie a operação.
+            `)
         } else {
-            console.log(`Saldo Anterior: ${this.saldo}`)
+            console.log(`
+SAQUE PROCESSADO
+        Conta: ${this.numeroDaConta}
+        Nome: ${this.cliente.nome}
+        -----------------------------
+        Saldo Anterior: ${this.saldo.toFixed(2)}
+        Valor sacado: ${valor.toFixed(2)}`
+            )
             this.saldo -= valor
-            console.log(`Saldo Atual: ${this.saldo}`)
+            console.log(`
+        -----------------------------
+        Saldo Atual: R$ ${this.saldo.toFixed(2)}
+        `)
         }
 
     };

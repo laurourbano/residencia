@@ -1,5 +1,5 @@
 export default abstract class Conta {
-    protected numeroDaConta: string;
+    public numeroDaConta: string;
 
     constructor(numeroDaConta: string) {
         this.numeroDaConta = numeroDaConta

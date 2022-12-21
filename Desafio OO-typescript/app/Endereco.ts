@@ -5,7 +5,7 @@ export default class Endereco {
     public complemento: string
     public cidade: string
     public estado: string
-    private arrayEnderecos: Array<Endereco> = []
+    public arrayEnderecos: Array<Endereco> = []
 
     constructor(cep: string, logradouro: string, numero: string, complemento: string, cidade: string, estado: string) {
         this.cep = cep

@@ -20,10 +20,15 @@ class ContaCorrente extends Conta_js_1.default {
         else {
             this.saldo -= valor;
             conta.saldo += valor;
-            console.log(`Transferência realizada com sucesso.
-            Valor transferido: R$ ${valor}
-            Conta de destino: ${conta}
-            Saldo atual: R$ ${this.saldo}`);
+            console.log(`
+TRANFERENCIA EFETUADA COM SUCESSO.
+        Conta: ${this.numeroDaConta}
+        Nome: ${this.cliente.nome}
+        -----------------------------
+        Valor transferido: R$ ${valor}
+        Conta de destino: ${conta.numeroDaConta}
+        -----------------------------
+        Saldo atual da conta ${this.numeroDaConta}: R$ ${this.saldo}`);
         }
     }
     calcularSaldo(arrayDebitos, arrayCreditos) {
@@ -35,10 +40,42 @@ class ContaCorrente extends Conta_js_1.default {
         });
         console.log(`Saldo disponível é de R$ ${this.saldo}`);
     }
-    depositar() { }
-    ;
-    sacar() {
+    depositar(valor) {
+        if (this.saldo) {
+            this.saldo += valor;
+        }
+        else {
+            this.saldo = valor;
+        }
+        console.log(`
+DEPÓSITO PROCESSADO
+        Conta: ${this.numeroDaConta}
+        Nome: ${this.cliente.nome}
+        Depósito de: R$ ${valor.toFixed(2)}
+        -----------------------------
+        Saldo atual de: R$ ${this.saldo.toFixed(2)}
+        `);
     }
     ;
+    sacar(valor) {
+        if (this.saldo < valor) {
+            console.log(`Não é possível sacar R$ ${valor.toFixed(2)}, pois seu saldo é de R$ ${this.saldo.toFixed(2)}. Reinicie a operação.`);
+        }
+        else {
+            console.log(`
+SAQUE PROCESSADO
+        Conta: ${this.numeroDaConta}
+        Nome: ${this.cliente.nome}
+        -----------------------------
+        Saldo Anterior: ${this.saldo.toFixed(2)}
+        Valor sacado: ${valor.toFixed(2)}`);
+            this.saldo -= valor;
+            console.log(`
+        -----------------------------
+        Saldo Atual: R$ ${this.saldo.toFixed(2)}
+        `);
+        }
+        ;
+    }
 }
 exports.default = ContaCorrente;
