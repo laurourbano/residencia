@@ -1,33 +1,50 @@
+import Pessoa from "./Pessoa.js";
 import Endereco from "./Endereco.js";
 import IUsuario from "./IUsuario.js";
-import ContaCorrente from "./ContaCorrente.js";
-import ContaPoupanca from "./ContaPoupanca.js";
-import Pessoa from "./Pessoa.js";
-
 export default class Cliente extends Pessoa implements IUsuario {
-    public vip: boolean
-    public arrayEnderecos: Array<Endereco> = []
-    public conta: ContaCorrente | ContaPoupanca
+    private readonly arrayEnderecos: Endereco[] = []
+    private vip: boolean
 
-    constructor(cpf: string, nome: string, telefone: string, vip: boolean, arrayEnderecos: Array<Endereco>, conta?: ContaCorrente | ContaPoupanca) {
+    constructor(cpf: string, nome: string, telefone: string, vip: boolean) {
         super(cpf, nome, telefone);
         this.vip = vip
-        this.arrayEnderecos = arrayEnderecos
-        this.conta = conta as ContaCorrente | ContaPoupanca
+    }
+    public getCpf() {
+        return this.cpf
+    }
+    public setCpf(cpf: string) {
+        this.cpf = cpf
+    }
+    public getNome() {
+        return this.nome
+    }
+    public setNome(nome: string) {
+        this.nome = nome
+    }
+    public getTelefone() {
+        return this.telefone
+    }
+    public setTelefone(telefone: string) {
+        this.telefone = telefone
+    }
+    public getVip() {
+        return this.vip
+    }
+    public setVip(vip: boolean) {
+        this.vip = vip
+    }
+    public cadastraEnderecos(endereco: Endereco): void {
+        this.arrayEnderecos.push(endereco)
+    }
+    public listarEnderecos(): void {
+        for (const endereco of this.arrayEnderecos) {
+            console.log(endereco)
+        }
     }
 
-    /*addEndereco() {
-
-    }*/
-
-    //por enquanto void pq nao sei o que retornar ainda
-    //lista endereços
-    listarEnderecos(): void {
-        console.log('fazer a lógica')
-    }
     //implementado de IUsuario
     //autentica usuario
-    authenticateUser(): boolean {
+    public autenticaUsuario(): boolean {
         return true
     };
 

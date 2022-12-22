@@ -1,17 +1,23 @@
 import Cliente from "../Cliente"
+import ContaCorrente from "../ContaCorrente"
 import Endereco from "../Endereco"
 
 export function aplicacao_2(): void {
 
-    const endereco1 = new Endereco('80.000-001', 'rua androidum', '123', 'casa', 'Curitiba', 'Paraná')
-    const endereco2 = new Endereco('80.000-002', 'rua bulmerangue', '1127', 'casa b', 'Londrina', 'Paraná')
-    const endereco3 = new Endereco('80.000-003', 'rua taquara', '2', 'apartamento a', 'Nova Iguaçu', 'Rio de Janeiro')
-    const cliente1 = new Cliente("100.000.000-00", "Euclides Cunha", "(41)99999-9999", true, [ endereco1, endereco2, endereco3 ])
+    const cliente5 = new Cliente("100.000.000-00", "Euclides Cunha", "(41)99999-9999", true)
+    const conta1 = new ContaCorrente('005', cliente5, 1_000)
+
+    const endereco1 = new Endereco('80.111-001', 'rua a', '555', 'casa', 'Curitiba', 'Paraná')
+    const endereco2 = new Endereco('80.222-001', 'rua b', '444', 'casa', 'Curitiba', 'Paraná')
+    const endereco3 = new Endereco('80.333-001', 'rua c', '333', 'casa', 'Curitiba', 'Paraná')
+    cliente5.cadastraEnderecos(endereco1)
+    cliente5.cadastraEnderecos(endereco2)
+    cliente5.cadastraEnderecos(endereco3)
 
     console.log(`
-Nome: ${cliente1.nome}
+Nome: ${cliente5.getNome()}
+${cliente5.listarEnderecos()}
 `)
-    cliente1.listarEnderecos()
 }
 
 

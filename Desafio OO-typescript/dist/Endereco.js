@@ -2,7 +2,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 class Endereco {
     constructor(cep, logradouro, numero, complemento, cidade, estado) {
-        this.arrayEnderecos = [];
         this.cep = cep;
         this.logradouro = logradouro;
         this.numero = numero;
@@ -11,11 +10,42 @@ class Endereco {
         this.estado = estado;
     }
     ;
-    resgisterAdress(endereco) {
-        this.arrayEnderecos.push(endereco);
-        return this.arrayEnderecos;
+    getCep() {
+        return this.cep;
     }
-    ;
+    setCep(cep) {
+        this.cep = cep;
+    }
+    getLogradouro() {
+        return this.logradouro;
+    }
+    setLogradouro(logradouro) {
+        this.logradouro = logradouro;
+    }
+    getNumero() {
+        return this.numero;
+    }
+    setNumero(numero) {
+        this.numero = numero;
+    }
+    getComplemento() {
+        return this.complemento;
+    }
+    setComplemento(complemento) {
+        this.complemento = complemento;
+    }
+    getCidade() {
+        return this.cidade;
+    }
+    setCidade(cidade) {
+        this.cidade = cidade;
+    }
+    getEstado() {
+        return this.estado;
+    }
+    setEstado(estado) {
+        this.estado = estado;
+    }
 }
 exports.default = Endereco;
 ;

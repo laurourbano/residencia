@@ -1,3 +1,3 @@
 export default interface IUsuario {
-    authenticateUser(): boolean;
+    autenticaUsuario(): boolean;
 }

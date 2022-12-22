@@ -9,15 +9,15 @@ export function aplicacao_1(): void {
     const funcionario2 = new Funcionario('111.111.111-00', 'Joel', '(41)96666-9999', gerente)
 
     console.log(`
-Nome: ${funcionario1.nome}
-Cargo: ${funcionario1.cargo.nome}
-Salário: ${funcionario1.cargo.salario.toFixed(2)}
+Nome: ${funcionario1.getNome()}
+Cargo: ${funcionario1.getCargo().getNome()}
+Salário: ${funcionario1.getCargo().getSalario().toFixed(2)}
 `)
 
     console.log(`
-Nome: ${funcionario2.nome}
-Cargo: ${funcionario2.cargo.nome}
-Salário: ${funcionario2.cargo.salario.toFixed(2)}
+Nome: ${funcionario2.getNome()}
+Cargo: ${funcionario2.getCargo().getNome()}
+Salário: ${funcionario2.getCargo().getSalario().toFixed(2)}
 `)
 
 }

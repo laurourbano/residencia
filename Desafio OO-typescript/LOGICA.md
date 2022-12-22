@@ -22,3 +22,6 @@ CRIAFUNCIONARIO construtor (pessoa.nome, pessoa.cpf, pessoa.telefone, salario, C
 
 CRIACARGO construtor (nome)
 
+LOGICA CADASTRAR ENDERECOS:
+
+UNIAO DE DADOS PARA FORMAR UM OBJETO
