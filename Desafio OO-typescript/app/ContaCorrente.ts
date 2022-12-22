@@ -45,7 +45,7 @@ export default class ContaCorrente extends Conta {
         this.arrayDebitos.push(debito)
     }
 
-    public mensagemSemSaldo(valor: Debito) {
+    public mensagemSemSaldo(valor: number) {
         `
 Não foi possível realizar a operação no valor de ${valor.getValor()}, pois seu saldo atual é de R$ ${this.getSaldo()}
     `}
@@ -71,12 +71,20 @@ DEPÓSITO PROCESSADO
         -----------------------------
         Saldo atual de: R$ ${this.getSaldo().toFixed(2)}
             `}
-    public mensagemSaqueProcessado(valor: Debito) {
-
-    }
-    public mensagemSaldo() {
-        `Saldo disponível é de R$ ${this.getSaldo()}`
-    }
+    public mensagemSaqueProcessado(valor: number, novoSaldo:number) {
+        `
+SAQUE PROCESSADO
+        Conta Poupança: ${this.getNumeroDaConta()}
+        Nome: ${this.getCliente().getNome()}
+        -----------------------------
+        Saldo Anterior: ${this.getSaldo().toFixed(2)}
+        Valor sacado: ${valor.toFixed(2)}
+        `}
+    public mensagemSaldo() {`
+    Saldo disponível é de R$ ${this.getSaldo()}
+    -----------------------------
+    Saldo Atual: R$ ${this.getSaldo().toFixed(2)}
+`}
 
     //transferir
     transferir(conta: ContaCorrente | ContaPoupanca, valor: Debito): void {
@@ -108,22 +116,39 @@ DEPÓSITO PROCESSADO
         console.log(this.mensagemDepositoProcessado(valor))
     };
 
+
+
+
+
+
+
+
+
+
+    /*ver metodos*/
+
+
+
+
+
+
+
+
+    
     //saca
-    public sacar(valor: Debito): void {
+    public sacar(valor: Debito) {
+        const debito = new Debito(valor.getValor(), new Date())
+        this.adicionaDebitos(debito)
+        const valorSaque = debito.getValor()
+        const dataTransacao = debito.getData()
+        const saldoAtual = this.getSaldo()
+        const novoSaldo = saldoAtual - valorSaque
+
         if (this.getSaldo() < valor.getValor()) {
-            console.log(this.mensagemSemSaldo(valor))
+            console.log(this.mensagemSemSaldo(dataTransacao, valorSaque))
         } else {
-            console.log(this.mensagemSaqueProcessado(valor)
-            )
-            this.setSaldo(this.getSaldo() - valor.getValor())
-
-            const debito = new Debito(valor.getValor(), new Date())
-            this.adicionaDebitos(debito)
-
-            console.log(`
-        -----------------------------
-        Saldo Atual: R$ ${this.getSaldo().toFixed(2)}
-        `)
+            this.setSaldo(novoSaldo)
+            console.log(this.mensagemSaqueProcessado(dataTransacao, valorSaque, novoSaldo))
         };
     }
 

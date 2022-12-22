@@ -33,7 +33,8 @@ export default class Cliente extends Pessoa implements IUsuario {
     public setVip(vip: boolean) {
         this.vip = vip
     }
-    public cadastraEnderecos(endereco: Endereco): void {
+
+    public cadastrarEnderecos(endereco: Endereco): void {
         this.arrayEnderecos.push(endereco)
     }
     public listarEnderecos(): void {
@@ -42,7 +43,6 @@ export default class Cliente extends Pessoa implements IUsuario {
         }
     }
 
-    //implementado de IUsuario
     //autentica usuario
     public autenticaUsuario(): boolean {
         return true
