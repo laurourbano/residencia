@@ -50,16 +50,17 @@ export default class ContaCorrente extends Conta {
 Não foi possível realizar a operação no valor de ${valor.getValor()}, pois seu saldo atual é de R$ ${this.getSaldo()}
     `}
 
-    public mensagemTransferenciaProcessada(conta: ContaCorrente | ContaPoupanca, valor: Debito) {
+    public mensagemTransferenciaProcessada(conta: ContaCorrente | ContaPoupanca, valorDeposito:number, saldoAtual:number, novoSaldo:number) {
         `
 TRANFERENCIA EFETUADA COM SUCESSO.
         Conta: ${this.getNumeroDaConta()}
         Nome: ${this.getCliente().getNome()}
         -----------------------------
-        Valor transferido: R$ ${valor.getValor()}
+        Saldo atual da sua conta: R$ ${saldoAtual}
+        Valor transferido: R$ ${valorDeposito}
         Conta de destino: ${conta.getNumeroDaConta()}
         -----------------------------
-        Saldo atual da conta ${this.getNumeroDaConta()}: R$ ${this.getSaldo()}
+        Saldo atual da conta ${this.getNumeroDaConta()}: R$ ${saldoAtual}
             `}
     public mensagemDepositoProcessado(valor: Credito) {
         `
@@ -81,16 +82,18 @@ DEPÓSITO PROCESSADO
     transferir(conta: ContaCorrente | ContaPoupanca, valor: Debito): void {
         const debito = new Debito(valor.getValor(), new Date())
         this.adicionaDebitos(debito)
+        const saldoAtual = this.getSaldo()
+        const valorDeposito = valor.getValor()
 
         if (this.getSaldo() < valor.getValor()) {
             console.log(this.mensagemSemSaldo)
         } else {
             this.setSaldo(this.getSaldo() - valor.getValor())
-
+            const novoSaldo = this.getSaldo()
 
             conta.setSaldo(conta.getSaldo() + valor.getValor())
 
-            console.log(this.mensagemTransferenciaProcessada(conta, valor),)
+            console.log(this.mensagemTransferenciaProcessada(conta, valorDeposito, saldoAtual, novoSaldo))
         }
 
     }
