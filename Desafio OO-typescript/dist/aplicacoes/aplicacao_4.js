@@ -11,5 +11,8 @@ function aplicacao_4() {
     const cliente1 = new Cliente_1.default("222.000.000-01", "Lauro Otávio", "(41)97654-9999", true);
     const conta2 = new ContaCorrente_1.default('002', cliente1, 1000);
     const conta3 = new ContaPoupanca_1.default('003', cliente1, 1000);
+    conta2.depositar(1000);
+    conta3.depositar(1000);
+    conta2.transferir(conta3, 500);
 }
 exports.aplicacao_4 = aplicacao_4;

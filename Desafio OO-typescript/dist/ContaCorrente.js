@@ -42,70 +42,95 @@ class ContaCorrente extends Conta_js_1.default {
     adicionaDebitos(debito) {
         this.arrayDebitos.push(debito);
     }
-    mensagemSemSaldo(valor) {
+    mensagemSemSaldo(dataTransacao, valorSaque) {
         `
-Não foi possível realizar a operação no valor de ${valor.getValor()}, pois seu saldo atual é de R$ ${this.getSaldo()}
+--------------${dataTransacao}
+Não foi possível realizar a operação no valor de ${valorSaque}, pois seu saldo atual é de R$ ${this.getSaldo()}
     `;
     }
-    mensagemTransferenciaProcessada(conta, valor) {
+    mensagemTransferenciaProcessada(dataTransacao, conta, valorDeposito, saldoAtual, novoSaldo) {
         `
+--------------${dataTransacao}
 TRANFERENCIA EFETUADA COM SUCESSO.
         Conta: ${this.getNumeroDaConta()}
         Nome: ${this.getCliente().getNome()}
         -----------------------------
-        Valor transferido: R$ ${valor.getValor()}
+        Saldo atual da sua conta: R$ ${saldoAtual}
+        Valor transferido: R$ ${valorDeposito}
         Conta de destino: ${conta.getNumeroDaConta()}
         -----------------------------
-        Saldo atual da conta ${this.getNumeroDaConta()}: R$ ${this.getSaldo()}
+        Saldo atual da conta ${this.getNumeroDaConta()}: R$ ${novoSaldo}
             `;
     }
-    mensagemDepositoProcessado(valor) {
+    mensagemDepositoProcessado(dataTransacao, numeroDaConta, valorDeposito, saldoAtual, novoSaldo) {
         `
+--------------${dataTransacao}
 DEPÓSITO PROCESSADO
         Conta Corrente: ${this.getNumeroDaConta()}
         Nome: ${this.getCliente().getNome()}
-        Depósito de: R$ ${valor.getValor().toFixed(2)}
+        Depósito de: R$ ${valorDeposito.toFixed(2)}
         -----------------------------
         Saldo atual de: R$ ${this.getSaldo().toFixed(2)}
             `;
     }
-    mensagemSaqueProcessado(valor) {
+    mensagemSaqueProcessado(dataTransacao, numeroDaConta, valorSaque, saldoAtual, novoSaldo) {
+        `
+SAQUE PROCESSADO
+        Conta Poupança: ${this.getNumeroDaConta()}
+        Nome: ${this.getCliente().getNome()}
+        -----------------------------
+        Saldo Anterior: ${this.getSaldo().toFixed(2)}
+        Valor sacado: ${valorSaque.toFixed(2)}
+        `;
     }
     mensagemSaldo() {
-        `Saldo disponível é de R$ ${this.getSaldo()}`;
+        `
+    Saldo disponível é de R$ ${this.getSaldo()}
+    -----------------------------
+    Saldo Atual: R$ ${this.getSaldo().toFixed(2)}
+`;
     }
     transferir(conta, valor) {
-        const debito = new Debito_js_1.default(valor.getValor(), new Date());
+        const debito = new Debito_js_1.default(valor, new Date());
         this.adicionaDebitos(debito);
-        if (this.getSaldo() < valor.getValor()) {
+        const saldoAtual = this.getSaldo();
+        const valorTransferencia = valor;
+        const dataTransacao = debito.getData();
+        if (this.getSaldo() < valorTransferencia) {
             console.log(this.mensagemSemSaldo);
         }
         else {
-            this.setSaldo(this.getSaldo() - valor.getValor());
-            conta.setSaldo(conta.getSaldo() + valor.getValor());
-            console.log(this.mensagemTransferenciaProcessada(conta, valor));
+            this.setSaldo(this.getSaldo() - valor);
+            const novoSaldo = this.getSaldo();
+            conta.setSaldo(conta.getSaldo() + valor);
+            console.log(this.mensagemTransferenciaProcessada(dataTransacao, conta, valorTransferencia, saldoAtual, novoSaldo));
         }
     }
     depositar(valor) {
-        const credito = new Credito_js_1.default(valor.getValor(), new Date());
+        const credito = new Credito_js_1.default(valor, new Date());
         this.adicionaCreditos(credito);
-        this.setSaldo(this.getSaldo() + valor.getValor());
-        console.log(this.mensagemDepositoProcessado(valor));
+        const dataTransacao = credito.getData();
+        const valorDeposito = credito.getValor();
+        const saldoAtual = this.getSaldo();
+        const novoSaldo = this.getSaldo() + saldoAtual;
+        this.setSaldo(this.getSaldo() + valor);
+        console.log(this.mensagemDepositoProcessado(dataTransacao, this.getNumeroDaConta(), valorDeposito, saldoAtual, novoSaldo));
+        console.log(this.mensagemDepositoProcessado(dataTransacao, this.getNumeroDaConta(), valorDeposito, saldoAtual, novoSaldo));
     }
     ;
     sacar(valor) {
-        if (this.getSaldo() < valor.getValor()) {
-            console.log(this.mensagemSemSaldo(valor));
+        const debito = new Debito_js_1.default(valor, new Date());
+        this.adicionaDebitos(debito);
+        const valorSaque = debito.getValor();
+        const dataTransacao = debito.getData();
+        const saldoAtual = this.getSaldo();
+        const novoSaldo = saldoAtual - valorSaque;
+        if (this.getSaldo() < valor) {
+            console.log(this.mensagemSemSaldo(dataTransacao, valorSaque));
         }
         else {
-            console.log(this.mensagemSaqueProcessado(valor));
-            this.setSaldo(this.getSaldo() - valor.getValor());
-            const debito = new Debito_js_1.default(valor.getValor(), new Date());
-            this.adicionaDebitos(debito);
-            console.log(`
-        -----------------------------
-        Saldo Atual: R$ ${this.getSaldo().toFixed(2)}
-        `);
+            this.setSaldo(novoSaldo);
+            console.log(this.mensagemSaqueProcessado(dataTransacao, this.getNumeroDaConta(), valorSaque, saldoAtual, novoSaldo));
         }
         ;
     }

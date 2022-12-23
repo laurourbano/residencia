@@ -10,10 +10,10 @@ export function aplicacao_4(): void {
     const conta3 = new ContaPoupanca('003', cliente1, 1_000)
 
 
-    //conta2.depositar(1000)
+    conta2.depositar(1000)
 
-    //conta3.depositar(1000)
+    conta3.depositar(1000)
 
-    //conta2.transferir(conta3, 500)
+    conta2.transferir(conta3, 500)
 
 }

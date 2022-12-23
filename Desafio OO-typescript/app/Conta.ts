@@ -1,3 +1,5 @@
+import ContaCorrente from "./ContaCorrente";
+import ContaPoupanca from "./ContaPoupanca";
 import Credito from "./Credito";
 import Debito from "./Debito";
 
@@ -9,6 +11,6 @@ export default abstract class Conta {
     }
 
     //por enquanto void pq nao sei o que retornar ainda
-    abstract depositar(valor: Credito): void;
-    abstract sacar(valor: Debito): void;
+    abstract depositar(valor: number): void;
+    abstract sacar(valor: number): void;
 }

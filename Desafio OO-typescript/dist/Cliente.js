@@ -34,7 +34,7 @@ class Cliente extends Pessoa_js_1.default {
     setVip(vip) {
         this.vip = vip;
     }
-    cadastraEnderecos(endereco) {
+    cadastrarEnderecos(endereco) {
         this.arrayEnderecos.push(endereco);
     }
     listarEnderecos() {

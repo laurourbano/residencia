@@ -48,30 +48,38 @@ class ContaPoupanca extends Conta_1.default {
         return rentabilidadeMensal;
     }
     ;
-    mensagemSemSaldo(valor) {
+    mensagemSemSaldo(dataTransacao, valor, saldoAtual) {
         `
-        Não é possível realizar a operação no valor de R$ ${valor.toFixed(2)}, pois seu saldo é de R$ ${this.getSaldo().toFixed(2)}. Reinicie a operação.
+------------------${dataTransacao}
+Não é possível realizar a operação no valor de R$ ${valor.toFixed(2)}, pois seu saldo é de R$ ${saldoAtual.toFixed(2)}. Reinicie a operação.
         `;
     }
-    mensagemSaqueProcessado(valor) {
+    mensagemSaqueProcessado(dataTransacao, numeroDaConta, valorSaque, saldoAtual, novoSaldo) {
         `
+-----------------${dataTransacao}
 SAQUE PROCESSADO
-        Conta Poupança: ${this.getNumeroDaConta()}
+        Conta Poupança: ${numeroDaConta})}
         Nome: ${this.getCliente().getNome()}
         -----------------------------
-        Saldo Anterior: ${this.getSaldo().toFixed(2)}
-        Valor sacado: ${valor.toFixed(2)}
+        Saldo atual: ${saldoAtual.toFixed(2)}
+        -----------------------------
+        Valor sacado: ${valorSaque.toFixed(2)}
+        -----------------------------
+        Novo Saldo: ${novoSaldo.toFixed(2)}
         `;
     }
-    mensagemDepositoProcessado(valor) {
+    mensagemDepositoProcessado(dataTransacao, numeroDaConta, valorDeposito, saldoAtual, novoSaldo) {
         `
+------------------${dataTransacao}
 DEPÓSITO PROCESSADO
-        Conta Poupança: ${this.getNumeroDaConta()}
+        Conta Poupança: ${numeroDaConta}
         Nome: ${this.getCliente().getNome()}
         -----------------------------
-        Depósito de: R$ ${valor.toFixed(2)}
+        Saldo Atual: R$ ${saldoAtual}
         -----------------------------
-        Saldo atual de: R$ ${this.getSaldo().toFixed(2)}
+        Depósito de: R$ ${valorDeposito.toFixed(2)}
+        -----------------------------
+        Novo saldo de: R$ ${novoSaldo.toFixed(2)}
         `;
     }
     mensagemSaldo() {
@@ -84,28 +92,41 @@ SALDO
         `;
     }
     depositar(valor) {
-        const credito = new Credito_js_1.default(valor.getValor(), new Date());
+        const credito = new Credito_js_1.default(valor, new Date());
         this.adicionaCreditos(credito);
-        this.setSaldo(this.getSaldo() + valor.getValor());
-        console.log(this.mensagemDepositoProcessado(valor.getValor()));
+        const dataTransacao = credito.getData();
+        const valorDeposito = credito.getValor();
+        const saldoAtual = this.getSaldo();
+        const novoSaldo = this.getSaldo() + saldoAtual;
+        this.setSaldo(this.getSaldo() + valor);
+        console.log(this.mensagemDepositoProcessado(dataTransacao, this.getNumeroDaConta(), valorDeposito, saldoAtual, novoSaldo));
+        console.log(this.mensagemDepositoProcessado(dataTransacao, this.getNumeroDaConta(), valorDeposito, saldoAtual, novoSaldo));
     }
     ;
     sacar(valor) {
-        const debito = new Debito_js_1.default(valor.getValor(), new Date());
+        const debito = new Debito_js_1.default(valor, new Date());
         this.adicionaDebitos(debito);
-        if (this.getSaldo() < valor.getValor()) {
-            console.log(this.mensagemSemSaldo(valor.getValor()));
+        const valorSaque = debito.getValor();
+        const dataTransacao = debito.getData();
+        const saldoAtual = this.getSaldo();
+        const novoSaldo = saldoAtual - valorSaque;
+        if (this.getSaldo() < valor) {
+            console.log(this.mensagemSemSaldo(dataTransacao, valorSaque, saldoAtual));
         }
         else {
-            this.setSaldo(this.getSaldo() - valor.getValor());
-            console.log(this.mensagemSaqueProcessado(valor.getValor()));
+            this.setSaldo(novoSaldo);
+            console.log(this.mensagemSaqueProcessado(dataTransacao, this.getNumeroDaConta(), valorSaque, saldoAtual, novoSaldo));
         }
+        ;
     }
-    ;
-    calcularSaldo(debitos, creditos, rentabilidade) {
-        this.setSaldo((creditos - debitos) + rentabilidade);
+    calcularSaldo(arrayDebitos, arrayCreditos) {
+        arrayCreditos.forEach((credito) => {
+            this.setSaldo(this.getSaldo() + credito);
+        });
+        arrayDebitos.forEach((debito) => {
+            this.setSaldo(this.getSaldo() - debito);
+        });
         console.log(this.mensagemSaldo());
     }
-    ;
 }
 exports.default = ContaPoupanca;
