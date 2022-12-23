@@ -9,9 +9,9 @@ const ContaPoupanca_1 = __importDefault(require("../ContaPoupanca"));
 function aplicacao_5() {
     const cliente1 = new Cliente_1.default("222.000.000-01", "Lauro Otávio", "(41)97654-9999", true);
     const conta2 = new ContaPoupanca_1.default('005', cliente1, 0.01);
-    conta2.depositar(100);
-    conta2.depositar(100);
-    conta2.depositar(100);
-    conta2.sacar(50);
+    conta2.depositar(4);
+    conta2.depositar(4);
+    conta2.depositar(4);
+    conta2.sacar(23);
 }
 exports.aplicacao_5 = aplicacao_5;

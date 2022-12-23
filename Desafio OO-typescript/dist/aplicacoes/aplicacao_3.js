@@ -9,9 +9,9 @@ const ContaCorrente_1 = __importDefault(require("../ContaCorrente"));
 function aplicacao_3() {
     const cliente1 = new Cliente_1.default("100.000.000-00", "Euclides Cunha", "(41)99999-9999", true);
     const conta1 = new ContaCorrente_1.default('001', cliente1, 1000);
-    conta1.depositar(100);
-    conta1.depositar(100);
-    conta1.depositar(100);
-    conta1.sacar(100);
+    conta1.depositar(57);
+    conta1.depositar(43.5);
+    conta1.depositar(37.3);
+    conta1.sacar(222.5);
 }
 exports.aplicacao_3 = aplicacao_3;

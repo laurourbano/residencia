@@ -49,14 +49,14 @@ class ContaPoupanca extends Conta_1.default {
     }
     ;
     mensagemSemSaldo(dataTransacao, valor, saldoAtual) {
-        `
-------------------${dataTransacao}
-Não é possível realizar a operação no valor de R$ ${valor.toFixed(2)}, pois seu saldo é de R$ ${saldoAtual.toFixed(2)}. Reinicie a operação.
-        `;
+        console.log(`
+------------------Data: ${dataTransacao}
+Não é possível realizar a operação no valor de R$ ${valor.toFixed(2)}, pois seu saldo é de R$ ${saldoAtual.toFixed(2)}.
+        `);
     }
     mensagemSaqueProcessado(dataTransacao, numeroDaConta, valorSaque, saldoAtual, novoSaldo) {
-        `
------------------${dataTransacao}
+        console.log(`
+------------------Data: ${dataTransacao}
 SAQUE PROCESSADO
         Conta Poupança: ${numeroDaConta})}
         Nome: ${this.getCliente().getNome()}
@@ -66,48 +66,49 @@ SAQUE PROCESSADO
         Valor sacado: ${valorSaque.toFixed(2)}
         -----------------------------
         Novo Saldo: ${novoSaldo.toFixed(2)}
-        `;
+        `);
     }
     mensagemDepositoProcessado(dataTransacao, numeroDaConta, valorDeposito, saldoAtual, novoSaldo) {
-        `
-------------------${dataTransacao}
+        console.log(`
+------------------Data: ${dataTransacao}
 DEPÓSITO PROCESSADO
         Conta Poupança: ${numeroDaConta}
         Nome: ${this.getCliente().getNome()}
         -----------------------------
-        Saldo Atual: R$ ${saldoAtual}
+        Saldo Atual: R$ ${saldoAtual.toFixed(2)}
         -----------------------------
         Depósito de: R$ ${valorDeposito.toFixed(2)}
         -----------------------------
         Novo saldo de: R$ ${novoSaldo.toFixed(2)}
-        `;
+        `);
     }
     mensagemSaldo() {
-        `
+        const dataSaldo = new Date().toLocaleDateString('pt-BR');
+        console.log(`
+----------------------Data: ${dataSaldo}
 SALDO
         Conta Poupança: ${this.getNumeroDaConta()}
         Nome: ${this.getCliente().getNome()}
         -----------------------------
         Saldo atual de: R$ ${this.getSaldo().toFixed(2)}
-        `;
+        `);
     }
     depositar(valor) {
         const credito = new Credito_js_1.default(valor, new Date());
         this.adicionaCreditos(credito);
-        const dataTransacao = credito.getData();
+        const dataTransacao = credito.getData().toLocaleDateString('pt-BR');
         const valorDeposito = credito.getValor();
         const saldoAtual = this.getSaldo();
-        const novoSaldo = this.getSaldo() + saldoAtual;
+        const novoSaldo = saldoAtual + valorDeposito;
         this.setSaldo(this.getSaldo() + valor);
-        console.log(this.mensagemDepositoProcessado(dataTransacao, this.getNumeroDaConta(), valorDeposito, saldoAtual, novoSaldo));
-        console.log(this.mensagemDepositoProcessado(dataTransacao, this.getNumeroDaConta(), valorDeposito, saldoAtual, novoSaldo));
+        this.mensagemDepositoProcessado(dataTransacao, this.getNumeroDaConta(), valorDeposito, saldoAtual, novoSaldo);
     }
     ;
     sacar(valor) {
         const debito = new Debito_js_1.default(valor, new Date());
         this.adicionaDebitos(debito);
         const valorSaque = debito.getValor();
-        const dataTransacao = debito.getData();
+        const dataTransacao = debito.getData().toLocaleDateString('pt-BR');
         const saldoAtual = this.getSaldo();
         const novoSaldo = saldoAtual - valorSaque;
         if (this.getSaldo() < valor) {
@@ -115,7 +116,7 @@ SALDO
         }
         else {
             this.setSaldo(novoSaldo);
-            console.log(this.mensagemSaqueProcessado(dataTransacao, this.getNumeroDaConta(), valorSaque, saldoAtual, novoSaldo));
+            this.mensagemSaqueProcessado(dataTransacao, this.getNumeroDaConta(), valorSaque, saldoAtual, novoSaldo);
         }
         ;
     }
@@ -126,7 +127,7 @@ SALDO
         arrayDebitos.forEach((debito) => {
             this.setSaldo(this.getSaldo() - debito);
         });
-        console.log(this.mensagemSaldo());
+        this.mensagemSaldo();
     }
 }
 exports.default = ContaPoupanca;

@@ -1,7 +1,6 @@
 import Cliente from "../Cliente"
 import ContaCorrente from "../ContaCorrente"
 import ContaPoupanca from "../ContaPoupanca"
-import Endereco from "../Endereco"
 
 export function aplicacao_4(): void {
 
@@ -11,9 +10,9 @@ export function aplicacao_4(): void {
 
 
     conta2.depositar(1000)
-
     conta3.depositar(1000)
+    conta2.transferir(conta3, 5000)
+    conta2.mensagemSaldo()
 
-    conta2.transferir(conta3, 500)
 
 }
