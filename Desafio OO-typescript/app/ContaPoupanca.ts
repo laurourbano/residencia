@@ -125,7 +125,7 @@ SALDO
         const novoSaldo = saldoAtual - valorSaque
 
         if (this.getSaldo() < valor) {
-            console.log(this.mensagemSemSaldo(dataTransacao, valorSaque, saldoAtual))
+            this.mensagemSemSaldo(dataTransacao, valorSaque, saldoAtual)
         } else {
             this.setSaldo(novoSaldo)
             this.mensagemSaqueProcessado(dataTransacao, this.getNumeroDaConta(), valorSaque, saldoAtual, novoSaldo)

@@ -112,7 +112,7 @@ SALDO
         const saldoAtual = this.getSaldo();
         const novoSaldo = saldoAtual - valorSaque;
         if (this.getSaldo() < valor) {
-            console.log(this.mensagemSemSaldo(dataTransacao, valorSaque, saldoAtual));
+            this.mensagemSemSaldo(dataTransacao, valorSaque, saldoAtual);
         }
         else {
             this.setSaldo(novoSaldo);
