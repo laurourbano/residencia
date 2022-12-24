@@ -13,5 +13,6 @@ function aplicacao_3() {
     conta1.depositar(100);
     conta1.depositar(100);
     conta1.sacar(50);
+    conta1.mensagemSaldo();
 }
 exports.aplicacao_3 = aplicacao_3;

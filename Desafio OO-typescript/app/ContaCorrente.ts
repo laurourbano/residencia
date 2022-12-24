@@ -66,7 +66,7 @@ TRANFERENCIA EFETUADA COM SUCESSO.
         Conta Corrente: ${this.getNumeroDaConta()}
         Nome: ${this.getCliente().getNome()}
         -----------------------------
-        Valor transferido: R$ ${valorTransferencia}
+        Valor transferido: R$ ${valorTransferencia.toFixed(2)}
         Conta de destino: ${contaDestino}
         `)
     }
