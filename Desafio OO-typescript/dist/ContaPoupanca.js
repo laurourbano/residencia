@@ -92,6 +92,8 @@ SALDO
         -----------------------------
         Saldo atual de: R$ ${this.getSaldo().toFixed(2)}
         `);
+        console.log(this.arrayCreditos);
+        console.log(this.arrayDebitos);
     }
     depositar(valor) {
         const credito = new Credito_js_1.default(valor, new Date());
@@ -103,7 +105,6 @@ SALDO
             this.adicionaCreditos(credito);
             this.setSaldo(saldoAtual + valor);
             this.mensagemDepositoProcessado(dataTransacao, this.getNumeroDaConta(), valorDeposito, saldoAtual, novoSaldo);
-            console.log(this.arrayCreditos.values);
         }
     }
     sacar(valor) {

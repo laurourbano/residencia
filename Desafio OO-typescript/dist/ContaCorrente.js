@@ -61,7 +61,7 @@ TRANFERENCIA EFETUADA COM SUCESSO.
         -----------------------------
         Novo saldo da conta ${this.getNumeroDaConta()}: R$ ${novoSaldo.toFixed(2)}
         Limite: R$ ${this.getLimite().toFixed(2)}
-        Total disponível: R$ ${(this.getSaldo() + this.getLimite()).toFixed(2)}
+        Total disponível: R$ ${(novoSaldo + this.getLimite()).toFixed(2)}
     `);
     }
     mensagemDepositoProcessado(dataTransacao, numeroDaConta, valorDeposito, saldoAtual, novoSaldo) {
@@ -108,9 +108,12 @@ SALDO
         Limite: R$ ${this.getLimite().toFixed(2)}
         Total disponível: R$ ${(this.getSaldo() + this.getLimite()).toFixed(2)}
         `);
+        console.log(this.arrayCreditos);
+        console.log(this.arrayDebitos);
     }
     transferir(conta, valor) {
         const debito = new Debito_js_1.default(valor, new Date());
+        const credito = new Credito_js_1.default(valor, new Date());
         this.adicionaDebitos(debito);
         const saldoAtual = this.getSaldo();
         const valorTransferencia = valor;
@@ -123,6 +126,7 @@ SALDO
         }
         else {
             novoSaldo;
+            conta.adicionaCreditos(credito);
             conta.setSaldo(conta.getSaldo() + valorTransferencia);
             this.mensagemTransferenciaProcessada(dataTransacao, contaDestino, valorTransferencia, saldoAtual, novoSaldo);
         }
@@ -130,7 +134,7 @@ SALDO
     depositar(valor) {
         const credito = new Credito_js_1.default(valor, new Date());
         const conta = this.getNumeroDaConta();
-        const dataTransacao = credito.getData().toLocaleDateString('PT-BR');
+        const dataTransacao = credito.getData().toLocaleDateString('pt-BR');
         const valorDeposito = credito.getValor();
         const saldoAtual = this.getSaldo();
         const novoSaldo = saldoAtual + valorDeposito;
