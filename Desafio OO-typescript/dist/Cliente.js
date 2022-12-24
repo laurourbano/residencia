@@ -38,6 +38,8 @@ class Cliente extends Pessoa_js_1.default {
         this.arrayEnderecos.push(endereco);
     }
     listarEnderecos() {
+        console.log(this.getNome());
+        console.log(this.getCpf());
         for (const endereco of this.arrayEnderecos) {
             console.log(endereco);
         }

@@ -38,6 +38,8 @@ export default class Cliente extends Pessoa implements IUsuario {
         this.arrayEnderecos.push(endereco)
     }
     public listarEnderecos(): void {
+        console.log(this.getNome())
+        console.log(this.getCpf())
         for (const endereco of this.arrayEnderecos) {
             console.log(endereco)
         }
