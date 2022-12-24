@@ -1,6 +1,5 @@
 import Cliente from "./Cliente.js";
 import Conta from "./Conta"
-import ContaCorrente from "./ContaCorrente.js";
 import Credito from "./Credito.js";
 import Debito from "./Debito.js";
 
@@ -78,7 +77,7 @@ SAQUE PROCESSADO
     }
     public mensagemDepositoProcessado(dataTransacao: string, numeroDaConta: string, valorDeposito: number, saldoAtual: number, novoSaldo: number) {
         console.log(`
-------------------Data: ${dataTransacao}
+-------------------Data: ${dataTransacao}
 DEPÓSITO PROCESSADO
         Conta Poupança: ${numeroDaConta}
         Nome: ${this.getCliente().getNome()}
@@ -105,20 +104,22 @@ SALDO
     //deposita
     public depositar(valor: number): void {
         const credito = new Credito(valor, new Date())
-        this.adicionaCreditos(credito)
         const dataTransacao = credito.getData().toLocaleDateString('pt-BR')
         const valorDeposito = credito.getValor()
         const saldoAtual = this.getSaldo()
         const novoSaldo = saldoAtual + valorDeposito
-        this.setSaldo(this.getSaldo() + valor)
-
-        this.mensagemDepositoProcessado(dataTransacao, this.getNumeroDaConta(), valorDeposito, saldoAtual, novoSaldo)
-    };
+        if (valor > 0) {
+            this.adicionaCreditos(credito)
+            this.setSaldo(saldoAtual + valor)
+            this.mensagemDepositoProcessado(dataTransacao, this.getNumeroDaConta(), valorDeposito, saldoAtual, novoSaldo)
+            console.log(this.arrayCreditos.values)
+        }
+    }
 
     //saca
     public sacar(valor: number) {
         const debito = new Debito(valor, new Date())
-        this.adicionaDebitos(debito)
+
         const valorSaque = debito.getValor()
         const dataTransacao = debito.getData().toLocaleDateString('pt-BR')
         const saldoAtual = this.getSaldo()
@@ -129,6 +130,8 @@ SALDO
         } else {
             this.setSaldo(novoSaldo)
             this.mensagemSaqueProcessado(dataTransacao, this.getNumeroDaConta(), valorSaque, saldoAtual, novoSaldo)
+            this.adicionaDebitos(debito)
+            console.log(this.arrayDebitos)
         };
     }
 

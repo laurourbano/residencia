@@ -4,11 +4,13 @@ import ContaPoupanca from "../ContaPoupanca"
 export function aplicacao_5(): void {
 
     const cliente1 = new Cliente("222.000.000-01", "Lauro Otávio", "(41)97654-9999", true)
-    const conta2 = new ContaPoupanca('005', cliente1, 0.01)
+    const conta5 = new ContaPoupanca('005', cliente1, 0.01)
 
 
-    conta2.depositar(4)
-    conta2.depositar(4)
-    conta2.depositar(4)
-    conta2.sacar(23)
+    conta5.depositar(0)
+    conta5.depositar(12)
+    conta5.depositar(4)
+    conta5.sacar(23)
+
+    
 }

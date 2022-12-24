@@ -70,7 +70,7 @@ SAQUE PROCESSADO
     }
     mensagemDepositoProcessado(dataTransacao, numeroDaConta, valorDeposito, saldoAtual, novoSaldo) {
         console.log(`
-------------------Data: ${dataTransacao}
+-------------------Data: ${dataTransacao}
 DEPÓSITO PROCESSADO
         Conta Poupança: ${numeroDaConta}
         Nome: ${this.getCliente().getNome()}
@@ -95,18 +95,19 @@ SALDO
     }
     depositar(valor) {
         const credito = new Credito_js_1.default(valor, new Date());
-        this.adicionaCreditos(credito);
         const dataTransacao = credito.getData().toLocaleDateString('pt-BR');
         const valorDeposito = credito.getValor();
         const saldoAtual = this.getSaldo();
         const novoSaldo = saldoAtual + valorDeposito;
-        this.setSaldo(this.getSaldo() + valor);
-        this.mensagemDepositoProcessado(dataTransacao, this.getNumeroDaConta(), valorDeposito, saldoAtual, novoSaldo);
+        if (valor > 0) {
+            this.adicionaCreditos(credito);
+            this.setSaldo(saldoAtual + valor);
+            this.mensagemDepositoProcessado(dataTransacao, this.getNumeroDaConta(), valorDeposito, saldoAtual, novoSaldo);
+            console.log(this.arrayCreditos.values);
+        }
     }
-    ;
     sacar(valor) {
         const debito = new Debito_js_1.default(valor, new Date());
-        this.adicionaDebitos(debito);
         const valorSaque = debito.getValor();
         const dataTransacao = debito.getData().toLocaleDateString('pt-BR');
         const saldoAtual = this.getSaldo();
@@ -117,6 +118,8 @@ SALDO
         else {
             this.setSaldo(novoSaldo);
             this.mensagemSaqueProcessado(dataTransacao, this.getNumeroDaConta(), valorSaque, saldoAtual, novoSaldo);
+            this.adicionaDebitos(debito);
+            console.log(this.arrayDebitos);
         }
         ;
     }

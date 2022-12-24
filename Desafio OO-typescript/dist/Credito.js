@@ -10,6 +10,7 @@ class Credito {
     }
     setValor(valor) {
         this.valor = valor;
+        this.getData().toUTCString();
     }
     getData() {
         return this.data;

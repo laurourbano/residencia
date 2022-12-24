@@ -10,9 +10,10 @@ export function aplicacao_4(): void {
 
 
     conta2.depositar(1000)
-    conta3.depositar(1000)
-    conta2.transferir(conta3, 5000)
+    //conta3.depositar(1000)
+    conta2.transferir(conta3, 500)
     conta2.mensagemSaldo()
+    conta3.mensagemSaldo()
 
 
 }

@@ -12,8 +12,8 @@ function aplicacao_4() {
     const conta2 = new ContaCorrente_1.default('002', cliente1, 1000);
     const conta3 = new ContaPoupanca_1.default('003', cliente1, 1000);
     conta2.depositar(1000);
-    conta3.depositar(1000);
-    conta2.transferir(conta3, 5000);
+    conta2.transferir(conta3, 500);
     conta2.mensagemSaldo();
+    conta3.mensagemSaldo();
 }
 exports.aplicacao_4 = aplicacao_4;

@@ -11,6 +11,7 @@ export default class Credito {
     }
     public setValor(valor: number) {
         this.valor = valor
+        this.getData().toUTCString()
     }
     public getData() {
         return this.data

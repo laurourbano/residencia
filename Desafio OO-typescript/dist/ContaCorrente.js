@@ -59,7 +59,9 @@ TRANFERENCIA EFETUADA COM SUCESSO.
         Valor transferido: R$ ${valorTransferencia}
         Conta de destino: ${contaDestino}
         -----------------------------
-        Saldo atual da conta ${this.getNumeroDaConta()}: R$ ${novoSaldo}
+        Novo saldo da conta ${this.getNumeroDaConta()}: R$ ${novoSaldo.toFixed(2)}
+        Limite: R$ ${this.getLimite().toFixed(2)}
+        Total disponível: R$ ${(this.getSaldo() + this.getLimite()).toFixed(2)}
     `);
     }
     mensagemDepositoProcessado(dataTransacao, numeroDaConta, valorDeposito, saldoAtual, novoSaldo) {
@@ -73,7 +75,9 @@ DEPÓSITO PROCESSADO
         -----------------------------
         Depósito de: R$ ${valorDeposito.toFixed(2)}
         -----------------------------
-        Novo saldo de: R$ ${novoSaldo.toFixed(2)}
+        Novo saldo da conta ${this.getNumeroDaConta()}: R$ ${novoSaldo.toFixed(2)}
+        Limite: R$ ${this.getLimite().toFixed(2)}
+        Total disponível: R$ ${(this.getSaldo() + this.getLimite()).toFixed(2)}
             `);
     }
     mensagemSaqueProcessado(dataTransacao, numeroDaConta, valorSaque, saldoAtual, novoSaldo) {
@@ -87,7 +91,9 @@ SAQUE PROCESSADO
         -----------------------------
         Valor sacado: ${valorSaque.toFixed(2)}
         -----------------------------
-        Novo saldo: ${novoSaldo.toFixed(2)}
+        Novo saldo da conta ${this.getNumeroDaConta()}: R$ ${novoSaldo.toFixed(2)}
+        Limite: R$ ${this.getLimite().toFixed(2)}
+        Total disponível: R$ ${(this.getSaldo() + this.getLimite()).toFixed(2)}
         `);
     }
     mensagemSaldo() {
@@ -99,6 +105,8 @@ SALDO
         Nome: ${this.getCliente().getNome()}
         -----------------------------
         Saldo atual de: R$ ${this.getSaldo().toFixed(2)}
+        Limite: R$ ${this.getLimite().toFixed(2)}
+        Total disponível: R$ ${(this.getSaldo() + this.getLimite()).toFixed(2)}
         `);
     }
     transferir(conta, valor) {
@@ -108,24 +116,26 @@ SALDO
         const valorTransferencia = valor;
         const dataTransacao = debito.getData().toLocaleDateString('pt-BR');
         const contaDestino = conta.getNumeroDaConta();
-        if (saldoAtual < valorTransferencia) {
+        const limite = this.getLimite();
+        const novoSaldo = saldoAtual - valorTransferencia;
+        if ((saldoAtual + limite) < valorTransferencia) {
             this.mensagemSemSaldo(dataTransacao, valorTransferencia, saldoAtual);
         }
         else {
-            const novoSaldo = saldoAtual - valor;
-            conta.setSaldo(conta.getSaldo() + valor);
+            novoSaldo;
+            conta.setSaldo(conta.getSaldo() + valorTransferencia);
             this.mensagemTransferenciaProcessada(dataTransacao, contaDestino, valorTransferencia, saldoAtual, novoSaldo);
         }
     }
     depositar(valor) {
         const credito = new Credito_js_1.default(valor, new Date());
-        this.adicionaCreditos(credito);
+        const conta = this.getNumeroDaConta();
         const dataTransacao = credito.getData().toLocaleDateString('PT-BR');
         const valorDeposito = credito.getValor();
         const saldoAtual = this.getSaldo();
         const novoSaldo = saldoAtual + valorDeposito;
-        const conta = this.getNumeroDaConta();
-        this.setSaldo(this.getSaldo() + valor);
+        this.setSaldo(novoSaldo);
+        this.adicionaCreditos(credito);
         this.mensagemDepositoProcessado(dataTransacao, conta, valorDeposito, saldoAtual, novoSaldo);
     }
     ;
@@ -145,15 +155,6 @@ SALDO
             this.mensagemSaqueProcessado(dataTransacao, conta, valorSaque, saldoAtual, novoSaldo);
         }
         ;
-    }
-    calcularSaldo(arrayDebitos, arrayCreditos) {
-        arrayCreditos.forEach((credito) => {
-            this.setSaldo(this.getSaldo() + credito);
-        });
-        arrayDebitos.forEach((debito) => {
-            this.setSaldo(this.getSaldo() - debito);
-        });
-        this.mensagemSaldo();
     }
 }
 exports.default = ContaCorrente;
