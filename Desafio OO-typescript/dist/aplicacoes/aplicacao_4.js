@@ -8,13 +8,14 @@ const Cliente_1 = __importDefault(require("../Cliente"));
 const ContaCorrente_1 = __importDefault(require("../ContaCorrente"));
 const ContaPoupanca_1 = __importDefault(require("../ContaPoupanca"));
 function aplicacao_4() {
-    const cliente1 = new Cliente_1.default("222.000.000-01", "Lauro Otávio", "(41)97654-9999", true);
+    const cliente1 = new Cliente_1.default("111.111.111-11", "Lauro Otávio", "(41)99999-9999", true);
     const conta2 = new ContaCorrente_1.default('002', cliente1, 2000);
     conta2.mensagemSaldo();
-    const conta3 = new ContaPoupanca_1.default('003', cliente1);
-    conta3.mensagemSaldo();
     conta2.depositar(1000);
     conta2.mensagemSaldo();
+    const cliente2 = new Cliente_1.default("222.222.222-22", "John Doe", "(41)99999-9998", false);
+    const conta3 = new ContaPoupanca_1.default('003', cliente2);
+    conta3.mensagemSaldo();
     conta3.depositar(1000);
     conta3.mensagemSaldo();
     conta2.transferir(conta3, 500);

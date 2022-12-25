@@ -42,32 +42,34 @@ class ContaCorrente extends Conta_js_1.default {
     adicionaDebitos(debito) {
         this.arrayDebitos.push(debito);
     }
-    mensagemSemSaldoTransferencia(dataSemSaldo, valorTransferencia, saldoAtual) {
+    mensagemSemSaldoTransferencia(valorTransferencia, saldoAtual) {
         console.log(`
---------------------------------------- ${dataSemSaldo}
+---------------------------------------
 Não foi possível realizar a operação no valor de R$ ${valorTransferencia.toFixed(2)}, pois seu saldo atual é de R$ ${saldoAtual.toFixed(2)}
     `);
     }
-    mensagemSemSaldoSaque(dataSemSaldo, valorSaque, saldoAtual) {
+    mensagemSemSaldoSaque(valorSaque, saldoAtual) {
         console.log(`
---------------------------------------- ${dataSemSaldo}
+---------------------------------------
 Não foi possível realizar a operação no valor de R$ ${valorSaque.toFixed(2)}, pois seu saldo atual é de R$ ${saldoAtual.toFixed(2)}
     `);
     }
-    mensagemTransferenciaProcessada(dataTransacao, contaDestino, valorTransferencia) {
+    mensagemTransferenciaProcessada(contaDestino, clienteDestino, valorTransferencia) {
         console.log(`
---------------------------------------- ${dataTransacao}
+---------------------------------------
 TRANFERENCIA EFETUADA COM SUCESSO.
         Conta Corrente: ${this.getNumeroDaConta()}
         Nome: ${this.getCliente().getNome()}
         -----------------------------
         Valor transferido: R$ ${valorTransferencia.toFixed(2)}
+        -----------------------------
         Conta de destino: ${contaDestino}
+        Nome: ${clienteDestino}
         `);
     }
-    mensagemDepositoProcessado(dataTransacao, numeroDaConta, valorDeposito) {
+    mensagemDepositoProcessado(numeroDaConta, valorDeposito) {
         console.log(`
---------------------------------------- ${dataTransacao}
+--------------------------------------- 
 DEPÓSITO PROCESSADO
         Conta Corrente: ${numeroDaConta}
         Nome: ${this.getCliente().getNome()}
@@ -75,9 +77,9 @@ DEPÓSITO PROCESSADO
         Depósito de: R$ ${valorDeposito.toFixed(2)}
         `);
     }
-    mensagemSaqueProcessado(dataTransacao, numeroDaConta, valorSaque) {
+    mensagemSaqueProcessado(numeroDaConta, valorSaque) {
         console.log(`
---------------------------------------- ${dataTransacao}
+--------------------------------------- 
 SAQUE PROCESSADO
         Conta Corrente: ${numeroDaConta}
         Nome: ${this.getCliente().getNome()}
@@ -94,6 +96,7 @@ SALDO
         Nome: ${this.getCliente().getNome()}
         -----------------------------
         Saldo atual de: R$ ${this.getSaldo().toFixed(2)}
+        -----------------------------
         Limite: R$ ${this.getLimite().toFixed(2)}
         Total disponível: R$ ${(this.getSaldo() + this.getLimite()).toFixed(2)}
         `);
@@ -105,47 +108,50 @@ SALDO
         const credito = new Credito_js_1.default(valor, new Date());
         const saldoAtual = this.getSaldo();
         const valorTransferencia = valor;
-        const dataTransacao = debito.getData().toLocaleDateString('pt-BR');
+        const dataTransferencia = debito.getData();
+        const dataTransacao = dataTransferencia.toLocaleDateString('pt-BR');
         const contaDestino = conta.getNumeroDaConta();
+        const clienteDestino = conta.getCliente().getNome();
         const limite = this.getLimite();
         const novoSaldo = saldoAtual - valorTransferencia;
         if ((saldoAtual + limite) < valorTransferencia) {
-            this.mensagemSemSaldoTransferencia(dataTransacao, valorTransferencia, saldoAtual);
+            this.mensagemSemSaldoTransferencia(valorTransferencia, saldoAtual);
         }
         else {
             conta.adicionaCreditos(credito);
             this.adicionaDebitos(debito);
             conta.setSaldo(conta.getSaldo() + valorTransferencia);
             this.setSaldo(novoSaldo);
-            this.mensagemTransferenciaProcessada(dataTransacao, contaDestino, valorTransferencia);
+            this.mensagemTransferenciaProcessada(contaDestino, clienteDestino, valorTransferencia);
         }
     }
     depositar(valor) {
         const credito = new Credito_js_1.default(valor, new Date());
+        const dataDeposito = credito.getData();
         const conta = this.getNumeroDaConta();
-        const dataTransacao = credito.getData().toLocaleDateString('pt-BR');
+        const dataTransacao = dataDeposito.toLocaleDateString('pt-BR');
         const valorDeposito = credito.getValor();
         const saldoAtual = this.getSaldo();
         const novoSaldo = saldoAtual + valorDeposito;
         this.setSaldo(novoSaldo);
         this.adicionaCreditos(credito);
-        this.mensagemDepositoProcessado(dataTransacao, conta, valorDeposito);
+        this.mensagemDepositoProcessado(conta, valorDeposito);
     }
     ;
     sacar(valor) {
         const debito = new Debito_js_1.default(valor, new Date());
-        this.adicionaDebitos(debito);
         const valorSaque = debito.getValor();
         const dataTransacao = debito.getData().toLocaleDateString('pt-br');
         const saldoAtual = this.getSaldo();
         const novoSaldo = saldoAtual - valorSaque;
         const conta = this.getNumeroDaConta();
         if (this.getSaldo() < debito.valor) {
-            this.mensagemSemSaldoSaque(dataTransacao, valorSaque, saldoAtual);
+            this.mensagemSemSaldoSaque(valorSaque, saldoAtual);
         }
         else {
+            this.adicionaDebitos(debito);
             this.setSaldo(novoSaldo);
-            this.mensagemSaqueProcessado(dataTransacao, conta, valorSaque);
+            this.mensagemSaqueProcessado(conta, valorSaque);
         }
         ;
     }

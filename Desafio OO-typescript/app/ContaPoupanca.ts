@@ -4,7 +4,7 @@ import Credito from "./Credito.js";
 import Debito from "./Debito.js";
 
 export default class ContaPoupanca extends Conta {
-    private rentabilidadeMensal: number = 1/100 //1 por cento ao mês
+    private rentabilidadeMensal: number = 1 / 100 //1 por cento ao mês
     private saldo: number = 0
     private readonly cliente: Cliente
     private arrayDebitos: Debito[] = []
@@ -44,35 +44,26 @@ export default class ContaPoupanca extends Conta {
         this.arrayDebitos.push(debito)
     }
 
-    /*-------------------------------------------------------------------------*/
-    //VERIFICAR METODO ------ TRABALHAR NA LOGICA
-    public calculaRendimentoMensal(rentabilidadeMensal: number): number {
-        this.rentabilidadeMensal = rentabilidadeMensal
-        rentabilidadeMensal = 0.01
-        return rentabilidadeMensal
-    };
-    /*-------------------------------------------------------------------------*/
-
-    public mensagemSemSaldo(dataTransacao: string, valor: number, saldoAtual: number) {
+    public mensagemSemSaldo(valor: number, saldoAtual: number) {
         console.log(`
---------------------------------------- Data: ${dataTransacao}
+---------------------------------------
 Não é possível realizar a operação no valor de R$ ${valor.toFixed(2)}, pois seu saldo é de R$ ${saldoAtual.toFixed(2)}.
         `)
     }
 
-    public mensagemSaqueProcessado(dataTransacao: string, numeroDaConta: string, valorSaque: number) {
+    public mensagemSaqueProcessado(numeroDaConta: string, valorSaque: number) {
         console.log(`
---------------------------------------- Data: ${dataTransacao}
+---------------------------------------
 SAQUE PROCESSADO
-        Conta Poupança: ${numeroDaConta})}
+        Conta Poupança: ${numeroDaConta}
         Nome: ${this.getCliente().getNome()}
         -----------------------------
         Valor sacado: ${valorSaque.toFixed(2)}
         `)
     }
-    public mensagemDepositoProcessado(dataTransacao: string, numeroDaConta: string, valorDeposito: number) {
+    public mensagemDepositoProcessado(numeroDaConta: string, valorDeposito: number) {
         console.log(`
---------------------------------------- Data: ${dataTransacao}
+---------------------------------------
 DEPÓSITO PROCESSADO
         Conta Poupança: ${numeroDaConta}
         Nome: ${this.getCliente().getNome()}
@@ -81,9 +72,8 @@ DEPÓSITO PROCESSADO
         `)
     }
     public mensagemSaldo() {
-        const dataSaldo = new Date().toLocaleDateString('pt-BR')
         console.log(`
---------------------------------------- Data: ${dataSaldo}
+---------------------------------------
 SALDO
         Conta Poupança: ${this.getNumeroDaConta()}
         Nome: ${this.getCliente().getNome()}
@@ -91,50 +81,54 @@ SALDO
         Saldo atual de: R$ ${this.getSaldo().toFixed(2)}
         `
         )
-        console.log(this.arrayCreditos)
-        console.log(this.arrayDebitos)
+        //console.log(this.arrayCreditos)
+        //console.log(this.arrayDebitos)
     }
 
     //deposita
-    public depositar(valor: number): void {
+    public depositar(valor: number): Date {
         const credito = new Credito(valor, new Date())
-        const dataTransacao = credito.getData().toLocaleDateString('pt-BR')
+        const dataDeposito = credito.getData()
+        const dataTransacao = dataDeposito.toLocaleDateString('pt-BR')
         const valorDeposito = credito.getValor()
         const saldoAtual = this.getSaldo()
         if (valor > 0) {
             this.adicionaCreditos(credito)
-            this.setSaldo(saldoAtual + valor)
-            this.mensagemDepositoProcessado(dataTransacao, this.getNumeroDaConta(), valorDeposito)
+            this.setSaldo((saldoAtual + valor) + (saldoAtual * this.rentabilidadeMensal))
+
+            this.mensagemDepositoProcessado(this.getNumeroDaConta(), valorDeposito)
         }
+        return dataDeposito
     }
 
     //saca
     public sacar(valor: number) {
         const debito = new Debito(valor, new Date())
+        const dataSaque = debito.getData()
 
         const valorSaque = debito.getValor()
-        const dataTransacao = debito.getData().toLocaleDateString('pt-BR')
+        const dataTransacao = dataSaque.toLocaleDateString('pt-BR')
         const saldoAtual = this.getSaldo()
         const novoSaldo = saldoAtual - valorSaque
 
         if (this.getSaldo() < valor) {
-            this.mensagemSemSaldo(dataTransacao, valorSaque, saldoAtual)
+            this.mensagemSemSaldo(valorSaque, saldoAtual)
         } else {
             this.setSaldo(novoSaldo)
-            this.mensagemSaqueProcessado(dataTransacao, this.getNumeroDaConta(), valorSaque)
+            this.mensagemSaqueProcessado(this.getNumeroDaConta(), valorSaque)
             this.adicionaDebitos(debito)
-            console.log(this.arrayDebitos)
         };
+        return dataSaque
+
     }
 
-    //saldo
-    calcularSaldo(arrayDebitos: Array<number>, arrayCreditos: Array<number>) {
-        arrayCreditos.forEach((credito) => {
-            this.setSaldo(this.getSaldo() + credito)
-        });
-        arrayDebitos.forEach((debito) => {
-            this.setSaldo(this.getSaldo() - debito)
-        });
-        this.mensagemSaldo()
-    }
+    /*-------------------------------------------------------------------------*/
+    //VERIFICAR METODO ------ TRABALHAR NA LOGICA
+    public calculaRendimentoMensal(): void {
+        this.arrayCreditos.forEach((elemento) => {
+            elemento.getValor() + (elemento.getValor() * this.rentabilidadeMensal)
+        })
+    };
+    /*-------------------------------------------------------------------------*/
+
 }

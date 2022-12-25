@@ -42,31 +42,25 @@ class ContaPoupanca extends Conta_1.default {
     adicionaDebitos(debito) {
         this.arrayDebitos.push(debito);
     }
-    calculaRendimentoMensal(rentabilidadeMensal) {
-        this.rentabilidadeMensal = rentabilidadeMensal;
-        rentabilidadeMensal = 0.01;
-        return rentabilidadeMensal;
-    }
-    ;
-    mensagemSemSaldo(dataTransacao, valor, saldoAtual) {
+    mensagemSemSaldo(valor, saldoAtual) {
         console.log(`
---------------------------------------- Data: ${dataTransacao}
+---------------------------------------
 Não é possível realizar a operação no valor de R$ ${valor.toFixed(2)}, pois seu saldo é de R$ ${saldoAtual.toFixed(2)}.
         `);
     }
-    mensagemSaqueProcessado(dataTransacao, numeroDaConta, valorSaque) {
+    mensagemSaqueProcessado(numeroDaConta, valorSaque) {
         console.log(`
---------------------------------------- Data: ${dataTransacao}
+---------------------------------------
 SAQUE PROCESSADO
-        Conta Poupança: ${numeroDaConta})}
+        Conta Poupança: ${numeroDaConta}
         Nome: ${this.getCliente().getNome()}
         -----------------------------
         Valor sacado: ${valorSaque.toFixed(2)}
         `);
     }
-    mensagemDepositoProcessado(dataTransacao, numeroDaConta, valorDeposito) {
+    mensagemDepositoProcessado(numeroDaConta, valorDeposito) {
         console.log(`
---------------------------------------- Data: ${dataTransacao}
+---------------------------------------
 DEPÓSITO PROCESSADO
         Conta Poupança: ${numeroDaConta}
         Nome: ${this.getCliente().getNome()}
@@ -75,54 +69,51 @@ DEPÓSITO PROCESSADO
         `);
     }
     mensagemSaldo() {
-        const dataSaldo = new Date().toLocaleDateString('pt-BR');
         console.log(`
---------------------------------------- Data: ${dataSaldo}
+---------------------------------------
 SALDO
         Conta Poupança: ${this.getNumeroDaConta()}
         Nome: ${this.getCliente().getNome()}
         -----------------------------
         Saldo atual de: R$ ${this.getSaldo().toFixed(2)}
         `);
-        console.log(this.arrayCreditos);
-        console.log(this.arrayDebitos);
     }
     depositar(valor) {
         const credito = new Credito_js_1.default(valor, new Date());
-        const dataTransacao = credito.getData().toLocaleDateString('pt-BR');
+        const dataDeposito = credito.getData();
+        const dataTransacao = dataDeposito.toLocaleDateString('pt-BR');
         const valorDeposito = credito.getValor();
         const saldoAtual = this.getSaldo();
         if (valor > 0) {
             this.adicionaCreditos(credito);
-            this.setSaldo(saldoAtual + valor);
-            this.mensagemDepositoProcessado(dataTransacao, this.getNumeroDaConta(), valorDeposito);
+            this.setSaldo((saldoAtual + valor) + (saldoAtual * this.rentabilidadeMensal));
+            this.mensagemDepositoProcessado(this.getNumeroDaConta(), valorDeposito);
         }
+        return dataDeposito;
     }
     sacar(valor) {
         const debito = new Debito_js_1.default(valor, new Date());
+        const dataSaque = debito.getData();
         const valorSaque = debito.getValor();
-        const dataTransacao = debito.getData().toLocaleDateString('pt-BR');
+        const dataTransacao = dataSaque.toLocaleDateString('pt-BR');
         const saldoAtual = this.getSaldo();
         const novoSaldo = saldoAtual - valorSaque;
         if (this.getSaldo() < valor) {
-            this.mensagemSemSaldo(dataTransacao, valorSaque, saldoAtual);
+            this.mensagemSemSaldo(valorSaque, saldoAtual);
         }
         else {
             this.setSaldo(novoSaldo);
-            this.mensagemSaqueProcessado(dataTransacao, this.getNumeroDaConta(), valorSaque);
+            this.mensagemSaqueProcessado(this.getNumeroDaConta(), valorSaque);
             this.adicionaDebitos(debito);
-            console.log(this.arrayDebitos);
         }
         ;
+        return dataSaque;
     }
-    calcularSaldo(arrayDebitos, arrayCreditos) {
-        arrayCreditos.forEach((credito) => {
-            this.setSaldo(this.getSaldo() + credito);
+    calculaRendimentoMensal() {
+        this.arrayCreditos.forEach((elemento) => {
+            elemento.getValor() + (elemento.getValor() * this.rentabilidadeMensal);
         });
-        arrayDebitos.forEach((debito) => {
-            this.setSaldo(this.getSaldo() - debito);
-        });
-        this.mensagemSaldo();
     }
+    ;
 }
 exports.default = ContaPoupanca;
