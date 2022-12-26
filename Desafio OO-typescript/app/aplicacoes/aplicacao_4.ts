@@ -19,6 +19,8 @@ export function aplicacao_4(): void {
 
     conta2.transferir(conta3, 500)
     conta2.mensagemSaldo()
+    conta2.sacar(2450)
+    conta2.mensagemSaldo()
     conta3.mensagemSaldo()
 
 

@@ -49,9 +49,10 @@ Não foi possível realizar a operação no valor de R$ ${valorTransferencia.toF
     `);
     }
     mensagemSemSaldoSaque(valorSaque, saldoAtual) {
+        let disponivel = parseInt(saldoAtual.toFixed(2)) + parseInt(this.limite.toFixed(2));
         console.log(`
 ---------------------------------------
-Não foi possível realizar a operação no valor de R$ ${valorSaque.toFixed(2)}, pois seu saldo atual é de R$ ${saldoAtual.toFixed(2)}
+Não foi possível realizar a operação no valor de R$ ${valorSaque.toFixed(2)}, pois seu saldo atual é de R$ ${saldoAtual.toFixed(2)} e seu limite é de R$ ${this.limite.toFixed(2)}, sendo o total disponível R$ ${disponivel.toFixed(2)}
     `);
     }
     mensagemTransferenciaProcessada(contaDestino, clienteDestino, valorTransferencia) {
@@ -88,9 +89,9 @@ SAQUE PROCESSADO
         `);
     }
     mensagemSaldo() {
-        const dataSaldo = new Date().toLocaleDateString('pt-BR');
+        let disponivel = parseInt(this.getSaldo().toFixed(2)) + parseInt(this.getLimite().toFixed(2));
         console.log(`
---------------------------------------- Data: ${dataSaldo}
+--------------------------------------- 
 SALDO
         Conta Corrente: ${this.getNumeroDaConta()}
         Nome: ${this.getCliente().getNome()}
@@ -98,7 +99,7 @@ SALDO
         Saldo atual de: R$ ${this.getSaldo().toFixed(2)}
         -----------------------------
         Limite: R$ ${this.getLimite().toFixed(2)}
-        Total disponível: R$ ${(this.getSaldo() + this.getLimite()).toFixed(2)}
+        Total disponível: R$ ${disponivel.toFixed(2)}
         `);
         console.log(this.arrayCreditos);
         console.log(this.arrayDebitos);
@@ -114,14 +115,18 @@ SALDO
         const clienteDestino = conta.getCliente().getNome();
         const limite = this.getLimite();
         const novoSaldo = saldoAtual - valorTransferencia;
-        if ((saldoAtual + limite) < valorTransferencia) {
+        let disponivel = saldoAtual + limite;
+        if ((disponivel) < valorTransferencia) {
             this.mensagemSemSaldoTransferencia(valorTransferencia, saldoAtual);
         }
         else {
             conta.adicionaCreditos(credito);
-            this.adicionaDebitos(debito);
             conta.setSaldo(conta.getSaldo() + valorTransferencia);
+            this.adicionaDebitos(debito);
             this.setSaldo(novoSaldo);
+            if (novoSaldo < 0 && disponivel > 0) {
+                disponivel = this.limite + novoSaldo;
+            }
             this.mensagemTransferenciaProcessada(contaDestino, clienteDestino, valorTransferencia);
         }
     }
@@ -143,14 +148,17 @@ SALDO
         const valorSaque = debito.getValor();
         const dataTransacao = debito.getData().toLocaleDateString('pt-br');
         const saldoAtual = this.getSaldo();
+        let limite = this.getLimite();
         const novoSaldo = saldoAtual - valorSaque;
         const conta = this.getNumeroDaConta();
-        if (this.getSaldo() < debito.valor) {
+        let disponivel = saldoAtual + limite;
+        if (disponivel < debito.valor) {
             this.mensagemSemSaldoSaque(valorSaque, saldoAtual);
         }
         else {
             this.adicionaDebitos(debito);
             this.setSaldo(novoSaldo);
+            disponivel = limite + novoSaldo;
             this.mensagemSaqueProcessado(conta, valorSaque);
         }
         ;
