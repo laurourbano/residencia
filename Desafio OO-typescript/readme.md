@@ -1,16 +1,23 @@
 Requisitos
 1. Criação das Classes Abstratas: as Classes
 
- Classe Abstrata Conta/
- 
+
+```typescript
+ abstract class Conta
+
+``` 
  e 
  
- Classe Abstrata Pessoa 
- 
+```typescript
+ abstract class Pessoa 
+
+``` 
  são classes abstratas, isto é, não podem instanciar objetos, mas somente auxiliar na definição de outras classes.
 
-2. Criação da interface IUsuario:
+```typescript
+interface IUsuario
 
+```
 a interface IUsuario possui apenas a assinatura de um método.
 
 Esse método, quando implementado nas classes que realizam a interface, deve retornar apenas retunr true.
