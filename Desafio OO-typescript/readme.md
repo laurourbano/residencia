@@ -9,6 +9,7 @@ retornar apenas <retunr true>.
 3. Criação das <Classes Concretas>: as classes concretas são todas as demais classes. Repare
 que algumas delas possuem relacionamento de herança com as classes abstratas existentes
 no modelo.
+
     a. Método <listarEnderecos()> da classe Cliente: o método deve imprimir no console
     todos os endereços armazenados para um cliente.
         - criaEndereço, armazenaEndereço<array de objetos Adress>, listaEndereço
@@ -48,16 +49,19 @@ Esses números vão auxiliar na definição da estrutura de dados a ser utilizad
 
 5. Criação de Objetos:
 ● Aplicação 1
+
     ○ Crie dois funcionários do banco, um gerente e um atendente.
 <instanciar new Employee>
 
 ● Aplicação 2
+
     ○ Crie um cliente e adicione 3 endereços a ele
 <instanciar 3 * new Adress>
     ○ Imprima os endereços desse cliente
 <imprimir {console.log} AdressList>
 
 ● Aplicação 3
+
     ○ Crie um cliente que possua uma ContaCorrente
 <instanciar new Client => <new CheckingAccount>
     ○ Efetue três depósitos de 100 nessa ContaCorrente
@@ -68,6 +72,7 @@ Esses números vão auxiliar na definição da estrutura de dados a ser utilizad
 <chamar metodo calculateBalance {console.log}>
 
 ● Aplicação 4
+
     ○ Crie um cliente que possua uma ContaCorrente
 <instanciar new Client => <new CheckingAccount>
     ○ Efetue um depósito de 1000 nessa ContaCorrente
@@ -81,6 +86,7 @@ Esses números vão auxiliar na definição da estrutura de dados a ser utilizad
 <chamar metodo transfer sai da CheckingAccount vai para SavingsAccount>
 
 ● Aplicação 5
+
     ○ Crie um cliente que possua uma ContaPoupanca
 <instaciar new Client => <new SavingsAccount>
     ○ Defina a rentabilidadeMensal em 1%
