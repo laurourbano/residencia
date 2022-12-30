@@ -7,46 +7,40 @@ const Pessoa_js_1 = __importDefault(require("./Pessoa.js"));
 class Cliente extends Pessoa_js_1.default {
     constructor(cpf, nome, telefone, vip) {
         super(cpf, nome, telefone);
-        this.arrayEnderecos = [];
+        this.enderecos = [];
+        this.contas = [];
         this.vip = vip;
     }
-    getCpf() {
-        return this.cpf;
+    ;
+    addConta(conta) {
+        this.contas.push(conta);
     }
-    setCpf(cpf) {
-        this.cpf = cpf;
-    }
-    getNome() {
-        return this.nome;
-    }
-    setNome(nome) {
-        this.nome = nome;
-    }
-    getTelefone() {
-        return this.telefone;
-    }
-    setTelefone(telefone) {
-        this.telefone = telefone;
-    }
+    ;
     getVip() {
         return this.vip;
     }
+    ;
     setVip(vip) {
         this.vip = vip;
     }
-    cadastrarEnderecos(endereco) {
-        this.arrayEnderecos.push(endereco);
+    ;
+    addEndereco(endereco) {
+        this.enderecos.push(endereco);
     }
+    ;
     listarEnderecos() {
         console.log(this.getNome());
         console.log(this.getCpf());
-        for (const endereco of this.arrayEnderecos) {
+        for (const endereco of this.enderecos) {
             console.log(endereco);
         }
+        ;
     }
+    ;
     autenticaUsuario() {
         return true;
     }
     ;
 }
 exports.default = Cliente;
+;

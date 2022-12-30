@@ -8,46 +8,42 @@ const Credito_js_1 = __importDefault(require("./Credito.js"));
 const Debito_js_1 = __importDefault(require("./Debito.js"));
 class ContaPoupanca extends Conta_1.default {
     constructor(numeroDaConta, cliente) {
-        super(numeroDaConta);
+        super(numeroDaConta, cliente);
         this.rentabilidadeMensal = 1 / 100;
         this.saldo = 0;
-        this.arrayDebitos = [];
-        this.arrayCreditos = [];
-        this.cliente = cliente;
     }
+    ;
     getNumeroDaConta() {
         return this.numeroDaConta;
     }
+    ;
     setNumeroDaConta(numeroDaConta) {
         this.numeroDaConta = numeroDaConta;
     }
+    ;
     getRentabilidadeMensal() {
         return this.rentabilidadeMensal;
     }
+    ;
     setRentabilidadeMensal(rentabilidadeMensal) {
         this.rentabilidadeMensal = rentabilidadeMensal;
     }
+    ;
     getSaldo() {
         return this.saldo;
     }
+    ;
     setSaldo(saldo) {
         this.saldo = saldo;
     }
-    getCliente() {
-        return this.cliente;
-    }
-    adicionaCreditos(credito) {
-        this.arrayCreditos.push(credito);
-    }
-    adicionaDebitos(debito) {
-        this.arrayDebitos.push(debito);
-    }
+    ;
     mensagemSemSaldo(valor, saldoAtual) {
         console.log(`
 ---------------------------------------
 Não é possível realizar a operação no valor de R$ ${valor.toFixed(2)}, pois seu saldo é de R$ ${saldoAtual.toFixed(2)}.
         `);
     }
+    ;
     mensagemSaqueProcessado(numeroDaConta, valorSaque) {
         console.log(`
 ---------------------------------------
@@ -58,6 +54,7 @@ SAQUE PROCESSADO
         Valor sacado: ${valorSaque.toFixed(2)}
         `);
     }
+    ;
     mensagemDepositoProcessado(numeroDaConta, valorDeposito) {
         console.log(`
 ---------------------------------------
@@ -68,6 +65,7 @@ DEPÓSITO PROCESSADO
         Depósito de: R$ ${valorDeposito.toFixed(2)}
         `);
     }
+    ;
     mensagemSaldo() {
         console.log(`
 ---------------------------------------
@@ -78,10 +76,10 @@ SALDO
         Saldo atual de: R$ ${this.getSaldo().toFixed(2)}
         `);
     }
+    ;
     depositar(valor) {
         const credito = new Credito_js_1.default(valor, new Date());
         const dataDeposito = credito.getData();
-        const dataTransacao = dataDeposito.toLocaleDateString('pt-BR');
         const valorDeposito = credito.getValor();
         const saldoAtual = this.getSaldo();
         if (valor > 0) {
@@ -89,8 +87,10 @@ SALDO
             this.setSaldo((saldoAtual + valor) + (saldoAtual * this.rentabilidadeMensal));
             this.mensagemDepositoProcessado(this.getNumeroDaConta(), valorDeposito);
         }
+        ;
         return dataDeposito;
     }
+    ;
     sacar(valor) {
         const debito = new Debito_js_1.default(valor, new Date());
         const dataSaque = debito.getData();
@@ -109,8 +109,9 @@ SALDO
         ;
         return dataSaque;
     }
+    ;
     calculaRendimentoMensal() {
-        this.arrayCreditos.forEach((elemento) => {
+        Credito_js_1.default.creditos.forEach((elemento) => {
             elemento.getValor() + (elemento.getValor() * this.rentabilidadeMensal);
         });
     }

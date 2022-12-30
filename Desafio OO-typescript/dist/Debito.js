@@ -9,15 +9,19 @@ class Debito {
     getValor() {
         return this.valor;
     }
+    ;
     setValor(valor) {
         this.valor = valor;
     }
+    ;
     getData() {
         return this.data;
     }
+    ;
     setData(data) {
         this.data = data;
     }
+    ;
 }
 exports.default = Debito;
 ;

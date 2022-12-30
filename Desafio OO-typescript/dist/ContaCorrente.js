@@ -8,40 +8,35 @@ const Credito_js_1 = __importDefault(require("./Credito.js"));
 const Debito_js_1 = __importDefault(require("./Debito.js"));
 class ContaCorrente extends Conta_js_1.default {
     constructor(numeroDaConta, cliente, limite) {
-        super(numeroDaConta);
+        super(numeroDaConta, cliente);
         this.saldo = 0;
-        this.arrayDebitos = [];
-        this.arrayCreditos = [];
         this.limite = limite;
-        this.cliente = cliente;
     }
+    ;
     getNumeroDaConta() {
         return this.numeroDaConta;
     }
+    ;
     setNumeroDaConta(numeroDaConta) {
         this.numeroDaConta = numeroDaConta;
     }
+    ;
     getLimite() {
         return this.limite;
     }
+    ;
     setLimite(limite) {
         this.limite = limite;
     }
+    ;
     getSaldo() {
         return this.saldo;
     }
+    ;
     setSaldo(saldo) {
         this.saldo = saldo;
     }
-    getCliente() {
-        return this.cliente;
-    }
-    adicionaCreditos(credito) {
-        this.arrayCreditos.push(credito);
-    }
-    adicionaDebitos(debito) {
-        this.arrayDebitos.push(debito);
-    }
+    ;
     mensagemSemSaldoTransferencia(valorTransferencia, saldoAtual) {
         console.log(`
 ---------------------------------------
@@ -55,6 +50,7 @@ Não foi possível realizar a operação no valor de R$ ${valorTransferencia.toF
 Não foi possível realizar a operação no valor de R$ ${valorSaque.toFixed(2)}, pois seu saldo atual é de R$ ${saldoAtual.toFixed(2)} e seu limite é de R$ ${this.limite.toFixed(2)}, sendo o total disponível R$ ${disponivel.toFixed(2)}
     `);
     }
+    ;
     mensagemTransferenciaProcessada(contaDestino, clienteDestino, valorTransferencia) {
         console.log(`
 ---------------------------------------
@@ -68,6 +64,7 @@ TRANFERENCIA EFETUADA COM SUCESSO.
         Nome: ${clienteDestino}
         `);
     }
+    ;
     mensagemDepositoProcessado(numeroDaConta, valorDeposito) {
         console.log(`
 --------------------------------------- 
@@ -78,6 +75,7 @@ DEPÓSITO PROCESSADO
         Depósito de: R$ ${valorDeposito.toFixed(2)}
         `);
     }
+    ;
     mensagemSaqueProcessado(numeroDaConta, valorSaque) {
         console.log(`
 --------------------------------------- 
@@ -88,6 +86,7 @@ SAQUE PROCESSADO
         Valor sacado: ${valorSaque.toFixed(2)}
         `);
     }
+    ;
     mensagemSaldo() {
         let disponivel = parseInt(this.getSaldo().toFixed(2)) + parseInt(this.getLimite().toFixed(2));
         console.log(`
@@ -101,16 +100,14 @@ SALDO
         Limite: R$ ${this.getLimite().toFixed(2)}
         Total disponível: R$ ${disponivel.toFixed(2)}
         `);
-        console.log(this.arrayCreditos);
-        console.log(this.arrayDebitos);
     }
+    ;
     transferir(conta, valor) {
         const debito = new Debito_js_1.default(valor, new Date());
         const credito = new Credito_js_1.default(valor, new Date());
+        const dataTransferencia = debito.getData();
         const saldoAtual = this.getSaldo();
         const valorTransferencia = valor;
-        const dataTransferencia = debito.getData();
-        const dataTransacao = dataTransferencia.toLocaleDateString('pt-BR');
         const contaDestino = conta.getNumeroDaConta();
         const clienteDestino = conta.getCliente().getNome();
         const limite = this.getLimite();
@@ -129,12 +126,13 @@ SALDO
             }
             this.mensagemTransferenciaProcessada(contaDestino, clienteDestino, valorTransferencia);
         }
+        ;
     }
+    ;
     depositar(valor) {
         const credito = new Credito_js_1.default(valor, new Date());
         const dataDeposito = credito.getData();
         const conta = this.getNumeroDaConta();
-        const dataTransacao = dataDeposito.toLocaleDateString('pt-BR');
         const valorDeposito = credito.getValor();
         const saldoAtual = this.getSaldo();
         const novoSaldo = saldoAtual + valorDeposito;
@@ -146,7 +144,6 @@ SALDO
     sacar(valor) {
         const debito = new Debito_js_1.default(valor, new Date());
         const valorSaque = debito.getValor();
-        const dataTransacao = debito.getData().toLocaleDateString('pt-br');
         const saldoAtual = this.getSaldo();
         let limite = this.getLimite();
         const novoSaldo = saldoAtual - valorSaque;
@@ -163,5 +160,7 @@ SALDO
         }
         ;
     }
+    ;
 }
 exports.default = ContaCorrente;
+;

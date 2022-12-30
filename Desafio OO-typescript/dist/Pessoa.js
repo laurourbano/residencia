@@ -6,6 +6,31 @@ class Pessoa {
         this.nome = nome;
         this.telefone = telefone;
     }
+    ;
+    getCpf() {
+        return this.cpf;
+    }
+    ;
+    setCpf(cpf) {
+        this.cpf = cpf;
+    }
+    ;
+    getNome() {
+        return this.nome;
+    }
+    ;
+    setNome(nome) {
+        this.nome = nome;
+    }
+    ;
+    getTelefone() {
+        return this.telefone;
+    }
+    ;
+    setTelefone(telefone) {
+        this.telefone = telefone;
+    }
+    ;
 }
 exports.default = Pessoa;
 ;
