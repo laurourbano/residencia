@@ -39,3 +39,4 @@ class Funcionario extends Pessoa_js_1.default {
     ;
 }
 exports.default = Funcionario;
+//# sourceMappingURL=Funcionario.js.map
