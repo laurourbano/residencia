@@ -50,4 +50,3 @@ class Cliente extends Pessoa_js_1.default {
     ;
 }
 exports.default = Cliente;
-//# sourceMappingURL=Cliente.js.map

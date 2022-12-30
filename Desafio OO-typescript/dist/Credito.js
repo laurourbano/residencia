@@ -20,4 +20,3 @@ class Credito {
     }
 }
 exports.default = Credito;
-//# sourceMappingURL=Credito.js.map

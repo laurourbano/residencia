@@ -9,4 +9,3 @@ class Pessoa {
 }
 exports.default = Pessoa;
 ;
-//# sourceMappingURL=Pessoa.js.map

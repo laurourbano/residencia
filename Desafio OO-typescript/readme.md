@@ -61,4 +61,18 @@ baixar conforme seu sistema operacional - para o meu projeto foi utilizado a ver
 
 https://nodejs.org/en/download/
 
+tsconfig.json:
+
+compilerOptions:
+   - echma script 2016;
+   - commonjs;
+   - diretório raiz ./app;
+   - determinar como o typescript verifica os arquivos através do node;
+   - diretório que é criado com os arquivos ".js" ./dist;
+   - remover os comentários no quando for compilado;
+   - não emitir arquivos compilados com erros no typescript;
+   - faciliar a importação de módulos (não tenho certeza do que isso faz)
+   - usar o modo estrito;
+   - usar any só de modo explícito;
+   - verificar se existe parametros nulos ou indefinidos;
 

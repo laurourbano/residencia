@@ -6,4 +6,3 @@ class Conta {
     }
 }
 exports.default = Conta;
-//# sourceMappingURL=Conta.js.map
