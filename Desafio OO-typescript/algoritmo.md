@@ -1,4 +1,5 @@
 **cadastracliente()**{
+
     Pessoa
         cpf
         nome
@@ -6,7 +7,9 @@
     endereco
     criaconta()    
 }
+
 **cadastrafuncionario()**{
+
     Pessoa
         cpf
         nome
@@ -16,32 +19,39 @@
 }
 
 **cadastracargo**(){
+
     gerente - salario 5000
     atentende - salario 2000
 }
 
 **criaconta()**{
+
     gera o numero
     escolhe se é poupanca ou corrente
     atribui a conta ao cliente
 }
+
 **tipocontapoupanca**
+
     Conta
         numero
     cliente
         dados
         
-gera débitos e créditos e tem um rendimentoMensal
-faz saques e depositos
+    gera débitos e créditos e tem um rendimentoMensal
+
+    faz saques e depositos
 
 **tipocontacorrente**
+
     Conta
         numero
     cliente
         dados
 
-gera débitos e créditos e tem um limite
-faz saque, depositos e transferencias
+    gera débitos e créditos e tem um limite
+
+    faz saque, depositos e transferencias
 
 
 

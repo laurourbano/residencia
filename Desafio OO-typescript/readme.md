@@ -3,6 +3,8 @@
 ## Utilizado node.js para apresentação dos dados gerados em console.
 
 
+- npx prettier '**/*.ts' '**/*.js' --write
+
 **Este projeto foi criado para solucionar um desafio apresentado pela IUUL para criação de uma aplicação em console de um banco em que foi apresentado um diagrama com as classes e métodos.**
 
  abstract class - classes abstratas
