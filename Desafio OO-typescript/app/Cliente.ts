@@ -27,7 +27,7 @@ export default class Cliente extends Pessoa implements IUsuario {
         console.log(this.getNome());
         console.log(this.getCpf());
         for (const endereco of this.enderecos) {
-            console.log(endereco);
+            console.log(JSON.stringify(endereco));
         };
     };
 

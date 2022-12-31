@@ -32,7 +32,7 @@ class Cliente extends Pessoa_js_1.default {
         console.log(this.getNome());
         console.log(this.getCpf());
         for (const endereco of this.enderecos) {
-            console.log(endereco);
+            console.log(JSON.stringify(endereco));
         }
         ;
     }
