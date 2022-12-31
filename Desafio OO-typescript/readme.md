@@ -49,30 +49,31 @@ Ao final do desafio foram apresentadas 5 comportamentos que seriam testados na a
 
 link para o trello utilizado para organizar as tarefas e as ideias do projeto:
 
-https://trello.com/b/OpmFDR5B/desafio-oo-typescript-iuul-ed
+      https://trello.com/b/OpmFDR5B/desafio-oo-typescript-iuul-ed
 
 link para baixar o typescript:
 
-https://www.typescriptlang.org/download
+      https://www.typescriptlang.org/download
 
 link para baixar o node.js:
 
-baixar conforme seu sistema operacional - para o meu projeto foi utilizado a versão para windows.
+###### baixar conforme seu sistema operacional - para o meu projeto foi utilizado a versão para windows.
 
-https://nodejs.org/en/download/
+      https://nodejs.org/en/download/
 
 tsconfig.json:
 
-compilerOptions:
-   - echma script 2016;
-   - commonjs;
-   - diretório raiz ./app;
-   - determinar como o typescript verifica os arquivos através do node;
-   - diretório que é criado com os arquivos ".js" ./dist;
-   - remover os comentários no quando for compilado;
-   - não emitir arquivos compilados com erros no typescript;
-   - faciliar a importação de módulos (não tenho certeza do que isso faz)
-   - usar o modo estrito;
-   - usar any só de modo explícito;
-   - verificar se existe parametros nulos ou indefinidos;
+      compilerOptions:
+
+      - echma script 2016;
+      - commonjs;
+      - diretório raiz ./app;
+      - determinar como o typescript verifica os arquivos através do node;
+      - diretório que é criado com os arquivos ".js" ./dist;
+      - remover os comentários no quando for compilado;
+      - não emitir arquivos compilados com erros no typescript;
+      - faciliar a importação de módulos (não tenho certeza do que isso faz)
+      - usar o modo estrito;
+      - usar any só de modo explícito;
+      - verificar se existe parametros nulos ou indefinidos;
 
