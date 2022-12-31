@@ -1,2 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+const aplicacao_1_1 = require("./aplicacoes/aplicacao_1");
+const aplicacao_2_1 = require("./aplicacoes/aplicacao_2");
+const aplicacao_3_1 = require("./aplicacoes/aplicacao_3");
+const aplicacao_4_1 = require("./aplicacoes/aplicacao_4");
+const aplicacao_5_1 = require("./aplicacoes/aplicacao_5");
+(0, aplicacao_1_1.aplicacao_1)();
+(0, aplicacao_2_1.aplicacao_2)();
+(0, aplicacao_3_1.aplicacao_3)();
+(0, aplicacao_4_1.aplicacao_4)();
+(0, aplicacao_5_1.aplicacao_5)();
