@@ -1,5 +1,5 @@
-import IUsuario from "./IUsuario.js";
 import Cargo from "./Cargo.js";
+import IUsuario from "./IUsuario.js";
 import Pessoa from "./Pessoa.js";
 
 export default class Funcionario extends Pessoa implements IUsuario {

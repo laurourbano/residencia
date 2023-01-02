@@ -20,14 +20,14 @@ export function aplicacao_1(): void {
   );
 
   console.log(`
-Nome: ${funcionario1.getNome()}
-Cargo: ${funcionario1.getCargo().getNome()}
-Salário: ${funcionario1.getSalario().toFixed(2)}
+Nome: ${ funcionario1.getNome() }
+Cargo: ${ funcionario1.getCargo().getNome() }
+Salário: ${ funcionario1.getSalario().toFixed(2) }
 `);
 
   console.log(`
-Nome: ${funcionario2.getNome()}
-Cargo: ${funcionario2.getCargo().getNome()}
-Salário: ${funcionario2.getSalario().toFixed(2)}
+Nome: ${ funcionario2.getNome() }
+Cargo: ${ funcionario2.getCargo().getNome() }
+Salário: ${ funcionario2.getSalario().toFixed(2) }
 `);
 }

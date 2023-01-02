@@ -33,9 +33,9 @@ export default class ContaPoupanca extends Conta {
   public mensagemSemSaldo(valor: number, saldoAtual: number) {
     console.log(`
 ---------------------------------------
-Não é possível realizar a operação no valor de R$ ${valor.toFixed(
+Não é possível realizar a operação no valor de R$ ${ valor.toFixed(
       2
-    )}, pois seu saldo é de R$ ${saldoAtual.toFixed(2)}.
+    ) }, pois seu saldo é de R$ ${ saldoAtual.toFixed(2) }.
         `);
   }
 
@@ -43,10 +43,10 @@ Não é possível realizar a operação no valor de R$ ${valor.toFixed(
     console.log(`
 ---------------------------------------
 SAQUE PROCESSADO
-        Conta Poupança: ${numeroDaConta}
-        Nome: ${this.getCliente().getNome()}
+        Conta Poupança: ${ numeroDaConta }
+        Nome: ${ this.getCliente().getNome() }
         -----------------------------
-        Valor sacado: ${valorSaque.toFixed(2)}
+        Valor sacado: ${ valorSaque.toFixed(2) }
         `);
   }
   public mensagemDepositoProcessado(
@@ -56,20 +56,20 @@ SAQUE PROCESSADO
     console.log(`
 ---------------------------------------
 DEPÓSITO PROCESSADO
-        Conta Poupança: ${numeroDaConta}
-        Nome: ${this.getCliente().getNome()}
+        Conta Poupança: ${ numeroDaConta }
+        Nome: ${ this.getCliente().getNome() }
         -----------------------------
-        Depósito de: R$ ${valorDeposito.toFixed(2)}
+        Depósito de: R$ ${ valorDeposito.toFixed(2) }
         `);
   }
   public mensagemSaldo() {
     console.log(`
 ---------------------------------------
 SALDO
-        Conta Poupança: ${this.getNumeroDaConta()}
-        Nome: ${this.getCliente().getNome()}
+        Conta Poupança: ${ this.getNumeroDaConta() }
+        Nome: ${ this.getCliente().getNome() }
         -----------------------------
-        Saldo atual de: R$ ${this.getSaldo().toFixed(2)}
+        Saldo atual de: R$ ${ this.getSaldo().toFixed(2) }
         `);
     //console.log(this.creditos)
     //console.log(this.debitos)
@@ -97,7 +97,7 @@ SALDO
     const dataSaque = debito.getData();
 
     const valorSaque = debito.getValor();
-    const dataTransacao = dataSaque.toLocaleDateString("pt-BR");
+    const dataTransacao = dataSaque.toLocaleDateString('pt-BR');
     const saldoAtual = this.getSaldo();
     const novoSaldo = saldoAtual - valorSaque;
 

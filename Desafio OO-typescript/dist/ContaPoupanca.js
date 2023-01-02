@@ -82,7 +82,7 @@ SALDO
         const debito = new Debito_js_1.default(valor, new Date());
         const dataSaque = debito.getData();
         const valorSaque = debito.getValor();
-        const dataTransacao = dataSaque.toLocaleDateString("pt-BR");
+        const dataTransacao = dataSaque.toLocaleDateString('pt-BR');
         const saldoAtual = this.getSaldo();
         const novoSaldo = saldoAtual - valorSaque;
         if (this.getSaldo() < valor) {

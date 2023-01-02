@@ -1,5 +1,5 @@
-import Conta from "./Conta.js";
 import Cliente from "./Cliente.js";
+import Conta from "./Conta.js";
 import ContaPoupanca from "./ContaPoupanca.js";
 import Credito from "./Credito.js";
 import Debito from "./Debito.js";
@@ -37,9 +37,9 @@ export default class ContaCorrente extends Conta {
   ) {
     console.log(`
 ---------------------------------------
-Não foi possível realizar a operação no valor de R$ ${valorTransferencia.toFixed(
+Não foi possível realizar a operação no valor de R$ ${ valorTransferencia.toFixed(
       2
-    )}, pois seu saldo atual é de R$ ${saldoAtual.toFixed(2)}
+    ) }, pois seu saldo atual é de R$ ${ saldoAtual.toFixed(2) }
     `);
   }
 
@@ -48,13 +48,13 @@ Não foi possível realizar a operação no valor de R$ ${valorTransferencia.toF
       parseInt(saldoAtual.toFixed(2)) + parseInt(this.limite.toFixed(2));
     console.log(`
 ---------------------------------------
-Não foi possível realizar a operação no valor de R$ ${valorSaque.toFixed(
+Não foi possível realizar a operação no valor de R$ ${ valorSaque.toFixed(
       2
-    )}, pois seu saldo atual é de R$ ${saldoAtual.toFixed(
+    ) }, pois seu saldo atual é de R$ ${ saldoAtual.toFixed(
       2
-    )} e seu limite é de R$ ${this.limite.toFixed(
+    ) } e seu limite é de R$ ${ this.limite.toFixed(
       2
-    )}, sendo o total disponível R$ ${disponivel.toFixed(2)}
+    ) }, sendo o total disponível R$ ${ disponivel.toFixed(2) }
     `);
   }
 
@@ -66,13 +66,13 @@ Não foi possível realizar a operação no valor de R$ ${valorSaque.toFixed(
     console.log(`
 ---------------------------------------
 TRANFERENCIA EFETUADA COM SUCESSO.
-        Conta Corrente: ${this.getNumeroDaConta()}
-        Nome: ${this.getCliente().getNome()}
+        Conta Corrente: ${ this.getNumeroDaConta() }
+        Nome: ${ this.getCliente().getNome() }
         -----------------------------
-        Valor transferido: R$ ${valorTransferencia.toFixed(2)}
+        Valor transferido: R$ ${ valorTransferencia.toFixed(2) }
         -----------------------------
-        Conta de destino: ${contaDestino}
-        Nome: ${clienteDestino}
+        Conta de destino: ${ contaDestino }
+        Nome: ${ clienteDestino }
         `);
   }
 
@@ -83,10 +83,10 @@ TRANFERENCIA EFETUADA COM SUCESSO.
     console.log(`
 --------------------------------------- 
 DEPÓSITO PROCESSADO
-        Conta Corrente: ${numeroDaConta}
-        Nome: ${this.getCliente().getNome()}
+        Conta Corrente: ${ numeroDaConta }
+        Nome: ${ this.getCliente().getNome() }
         ----------------------------
-        Depósito de: R$ ${valorDeposito.toFixed(2)}
+        Depósito de: R$ ${ valorDeposito.toFixed(2) }
         `);
   }
 
@@ -94,10 +94,10 @@ DEPÓSITO PROCESSADO
     console.log(`
 --------------------------------------- 
 SAQUE PROCESSADO
-        Conta Corrente: ${numeroDaConta}
-        Nome: ${this.getCliente().getNome()}
+        Conta Corrente: ${ numeroDaConta }
+        Nome: ${ this.getCliente().getNome() }
         -----------------------------
-        Valor sacado: ${valorSaque.toFixed(2)}
+        Valor sacado: ${ valorSaque.toFixed(2) }
         `);
   }
   public mensagemSaldo() {
@@ -107,13 +107,13 @@ SAQUE PROCESSADO
     console.log(`
 --------------------------------------- 
 SALDO
-        Conta Corrente: ${this.getNumeroDaConta()}
-        Nome: ${this.getCliente().getNome()}
+        Conta Corrente: ${ this.getNumeroDaConta() }
+        Nome: ${ this.getCliente().getNome() }
         -----------------------------
-        Saldo atual de: R$ ${this.getSaldo().toFixed(2)}
+        Saldo atual de: R$ ${ this.getSaldo().toFixed(2) }
         -----------------------------
-        Limite: R$ ${this.getLimite().toFixed(2)}
-        Total disponível: R$ ${disponivel.toFixed(2)}
+        Limite: R$ ${ this.getLimite().toFixed(2) }
+        Total disponível: R$ ${ disponivel.toFixed(2) }
         `);
   }
 
