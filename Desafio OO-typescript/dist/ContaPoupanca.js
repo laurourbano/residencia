@@ -3,10 +3,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const Conta_1 = __importDefault(require("./Conta"));
+const Conta_js_1 = __importDefault(require("./Conta.js"));
 const Credito_js_1 = __importDefault(require("./Credito.js"));
 const Debito_js_1 = __importDefault(require("./Debito.js"));
-class ContaPoupanca extends Conta_1.default {
+class ContaPoupanca extends Conta_js_1.default {
     constructor(numeroDaConta, cliente) {
         super(numeroDaConta, cliente);
         this.rentabilidadeMensal = 1 / 100;
@@ -102,3 +102,4 @@ SALDO
     }
 }
 exports.default = ContaPoupanca;
+//# sourceMappingURL=ContaPoupanca.js.map

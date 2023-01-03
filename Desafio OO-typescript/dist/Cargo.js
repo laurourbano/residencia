@@ -12,3 +12,4 @@ class Cargo {
     }
 }
 exports.default = Cargo;
+//# sourceMappingURL=Cargo.js.map

@@ -23,3 +23,4 @@ Salário: ${funcionario2.getSalario().toFixed(2)}
 `);
 }
 exports.aplicacao_1 = aplicacao_1;
+//# sourceMappingURL=aplicacao_1.js.map

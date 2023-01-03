@@ -1,6 +1,6 @@
-import Cliente from "./Cliente";
-import Credito from "./Credito";
-import Debito from "./Debito";
+import Cliente from "./Cliente.js";
+import Credito from "./Credito.js";
+import Debito from "./Debito.js";
 
 export default abstract class Conta {
   protected numeroDaConta: string;
