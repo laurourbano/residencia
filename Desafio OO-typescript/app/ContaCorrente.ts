@@ -122,7 +122,7 @@ SALDO
         //const dataTransacao = dataTransferencia.toLocaleDateString('pt-BR');
         const debito = new Debito(valor, new Date());
         const credito = new Credito(valor, new Date());
-        const dataTransferencia = debito.getData();
+        //const dataTransferencia = debito.getData();
         const saldoAtual = this.getSaldo();
         const valorTransferencia = valor;
         const contaDestino = conta.getNumeroDaConta();
@@ -156,8 +156,6 @@ SALDO
     //depositar
     public depositar(valor: number): void {
         const credito = new Credito(valor, new Date());
-        //const dataTransacao = dataDeposito.toLocaleDateString('pt-BR');
-        const dataDeposito = credito.getData();
         const conta = this.getNumeroDaConta();
         const valorDeposito = credito.getValor();
         const saldoAtual = this.getSaldo();
@@ -171,7 +169,6 @@ SALDO
     //sacar
     public sacar(valor: number) {
         const debito = new Debito(valor, new Date());
-        //const dataTransacao = debito.getData().toLocaleDateString('pt-br');
         const valorSaque = debito.getValor();
         const saldoAtual = this.getSaldo();
         let limite = this.getLimite();

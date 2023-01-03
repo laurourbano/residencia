@@ -71,17 +71,15 @@ SALDO
         -----------------------------
         Saldo atual de: R$ ${ this.getSaldo().toFixed(2) }
         `);
-        //console.log(this.creditos)
-        //console.log(this.debitos)
     }
 
     //deposita
     public depositar(valor: number): Date {
-        //const dataTransacao = dataDeposito.toLocaleDateString('pt-BR');
         const credito = new Credito(valor, new Date());
         const dataDeposito = credito.getData();
         const valorDeposito = credito.getValor();
         const saldoAtual = this.getSaldo();
+
         if (valor > 0) {
             this.adicionaCreditos(credito);
             this.setSaldo(saldoAtual + valor + saldoAtual * this.rentabilidadeMensal);
@@ -97,7 +95,6 @@ SALDO
         const dataSaque = debito.getData();
 
         const valorSaque = debito.getValor();
-        const dataTransacao = dataSaque.toLocaleDateString('pt-BR');
         const saldoAtual = this.getSaldo();
         const novoSaldo = saldoAtual - valorSaque;
 
@@ -111,8 +108,6 @@ SALDO
         return dataSaque;
     }
 
-    /*------------------------------------------------------------------*/
-    //VERIFICAR METODO ------ TRABALHAR NA LOGICA
     public calculaRendimentoMensal(): void {
         Credito.creditos.forEach((elemento: Credito) => {
             elemento.getValor() + elemento.getValor() * this.rentabilidadeMensal;

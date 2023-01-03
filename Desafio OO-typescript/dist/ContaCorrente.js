@@ -94,7 +94,6 @@ SALDO
     transferir(conta, valor) {
         const debito = new Debito_js_1.default(valor, new Date());
         const credito = new Credito_js_1.default(valor, new Date());
-        const dataTransferencia = debito.getData();
         const saldoAtual = this.getSaldo();
         const valorTransferencia = valor;
         const contaDestino = conta.getNumeroDaConta();
@@ -118,7 +117,6 @@ SALDO
     }
     depositar(valor) {
         const credito = new Credito_js_1.default(valor, new Date());
-        const dataDeposito = credito.getData();
         const conta = this.getNumeroDaConta();
         const valorDeposito = credito.getValor();
         const saldoAtual = this.getSaldo();
