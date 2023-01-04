@@ -30,49 +30,6 @@ export default class ContaPoupanca extends Conta {
         this.saldo = saldo;
     }
 
-    public mensagemSemSaldo(valor: number, saldoAtual: number) {
-        console.log(`
----------------------------------------
-Não é possível realizar a operação no valor de R$ ${ valor.toFixed(
-            2
-        ) }, pois seu saldo é de R$ ${ saldoAtual.toFixed(2) }.
-        `);
-    }
-
-    public mensagemSaqueProcessado(numeroDaConta: string, valorSaque: number) {
-        console.log(`
----------------------------------------
-SAQUE PROCESSADO
-        Conta Poupança: ${ numeroDaConta }
-        Nome: ${ this.getCliente().getNome() }
-        -----------------------------
-        Valor sacado: ${ valorSaque.toFixed(2) }
-        `);
-    }
-    public mensagemDepositoProcessado(
-        numeroDaConta: string,
-        valorDeposito: number
-    ) {
-        console.log(`
----------------------------------------
-DEPÓSITO PROCESSADO
-        Conta Poupança: ${ numeroDaConta }
-        Nome: ${ this.getCliente().getNome() }
-        -----------------------------
-        Depósito de: R$ ${ valorDeposito.toFixed(2) }
-        `);
-    }
-    public mensagemSaldo() {
-        console.log(`
----------------------------------------
-SALDO
-        Conta Poupança: ${ this.getNumeroDaConta() }
-        Nome: ${ this.getCliente().getNome() }
-        -----------------------------
-        Saldo atual de: R$ ${ this.getSaldo().toFixed(2) }
-        `);
-    }
-
     //deposita
     public depositar(valor: number): Date {
         const credito = new Credito(valor, new Date());
@@ -113,5 +70,47 @@ SALDO
             elemento.getValor() + elemento.getValor() * this.rentabilidadeMensal;
         });
     }
-    /*------------------------------------------------------------------*/
+
+    public mensagemSemSaldo(valor: number, saldoAtual: number) {
+        console.log(`
+---------------------------------------
+Não é possível realizar a operação no valor de R$ ${ valor.toFixed(2) }, 
+pois seu saldo é de R$ ${ saldoAtual.toFixed(2) }.
+        `);
+    }
+
+    public mensagemSaqueProcessado(numeroDaConta: string, valorSaque: number) {
+        console.log(`
+---------------------------------------
+SAQUE PROCESSADO
+        Conta Poupança: ${ numeroDaConta }
+        Nome: ${ this.getCliente().getNome() }
+        -----------------------------
+        Valor sacado: ${ valorSaque.toFixed(2) }
+        `);
+    }
+    public mensagemDepositoProcessado(
+        numeroDaConta: string,
+        valorDeposito: number
+    ) {
+        console.log(`
+---------------------------------------
+DEPÓSITO PROCESSADO
+        Conta Poupança: ${ numeroDaConta }
+        Nome: ${ this.getCliente().getNome() }
+        -----------------------------
+        Depósito de: R$ ${ valorDeposito.toFixed(2) }
+        `);
+    }
+    public mensagemSaldo() {
+        console.log(`
+---------------------------------------
+SALDO
+        Conta Poupança: ${ this.getNumeroDaConta() }
+        Nome: ${ this.getCliente().getNome() }
+        -----------------------------
+        Saldo atual de: R$ ${ this.getSaldo().toFixed(2) }
+        `);
+    }
+
 }
