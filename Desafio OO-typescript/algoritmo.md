@@ -86,6 +86,15 @@ LOGICA CADASTRAR ENDERECOS:
 
     faz saques e depositos
 
+    deposito na conta poupanca
+        quando faz o deposito
+        pega a data
+        pega o valor
+
+        **minha regra - aniversário sempre no dia 05 de cada mês**
+
+        se faz 30 dias do depósito - então atualiza o saldo daquele depósito, somando a rentabilidademensal
+
 **tipocontacorrente**
 
     Conta
