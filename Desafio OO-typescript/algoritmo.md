@@ -106,3 +106,21 @@ LOGICA CADASTRAR ENDERECOS:
 
     faz saque, depositos e transferencias
 
+deposito 1 {
+
+    data
+    aniversario
+    valorDeposito
+    saldo
+    rendimento
+}
+
+
+deposito 2 {
+
+    data
+    aniversario
+    valorDeposito
+    saldo
+    rendimento
+}
