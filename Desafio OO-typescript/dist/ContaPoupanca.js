@@ -30,10 +30,45 @@ class ContaPoupanca extends Conta_js_1.default {
     setSaldo(saldo) {
         this.saldo = saldo;
     }
+    depositar(valor) {
+        const credito = new Credito_js_1.default(valor, new Date());
+        const dataDeposito = credito.getData();
+        const valorDeposito = credito.getValor();
+        const saldoAtual = this.getSaldo();
+        if (valor > 0) {
+            this.adicionaCreditos(credito);
+            this.setSaldo(saldoAtual + valor + saldoAtual * this.rentabilidadeMensal);
+            this.mensagemDepositoProcessado(this.getNumeroDaConta(), valorDeposito);
+        }
+        return dataDeposito;
+    }
+    sacar(valor) {
+        const debito = new Debito_js_1.default(valor, new Date());
+        const dataSaque = debito.getData();
+        const numeroDaConta = this.getNumeroDaConta();
+        const valorSaque = debito.getValor();
+        const saldoAtual = this.getSaldo();
+        const novoSaldo = saldoAtual - valorSaque;
+        if (this.getSaldo() < valor) {
+            this.mensagemSemSaldo(valorSaque, saldoAtual);
+        }
+        else {
+            this.setSaldo(novoSaldo);
+            this.mensagemSaqueProcessado(numeroDaConta, valorSaque);
+            this.adicionaDebitos(debito);
+        }
+        return dataSaque;
+    }
+    calculaRendimentoMensal() {
+        Credito_js_1.default.creditos.forEach((elemento) => {
+            elemento.getValor() + (elemento.getValor() * this.rentabilidadeMensal);
+        });
+    }
     mensagemSemSaldo(valor, saldoAtual) {
         console.log(`
 ---------------------------------------
-Não é possível realizar a operação no valor de R$ ${valor.toFixed(2)}, pois seu saldo é de R$ ${saldoAtual.toFixed(2)}.
+Não é possível realizar a operação no valor de R$ ${valor.toFixed(2)}, 
+pois seu saldo é de R$ ${saldoAtual.toFixed(2)}.
         `);
     }
     mensagemSaqueProcessado(numeroDaConta, valorSaque) {
@@ -65,39 +100,6 @@ SALDO
         -----------------------------
         Saldo atual de: R$ ${this.getSaldo().toFixed(2)}
         `);
-    }
-    depositar(valor) {
-        const credito = new Credito_js_1.default(valor, new Date());
-        const dataDeposito = credito.getData();
-        const valorDeposito = credito.getValor();
-        const saldoAtual = this.getSaldo();
-        if (valor > 0) {
-            this.adicionaCreditos(credito);
-            this.setSaldo(saldoAtual + valor + saldoAtual * this.rentabilidadeMensal);
-            this.mensagemDepositoProcessado(this.getNumeroDaConta(), valorDeposito);
-        }
-        return dataDeposito;
-    }
-    sacar(valor) {
-        const debito = new Debito_js_1.default(valor, new Date());
-        const dataSaque = debito.getData();
-        const valorSaque = debito.getValor();
-        const saldoAtual = this.getSaldo();
-        const novoSaldo = saldoAtual - valorSaque;
-        if (this.getSaldo() < valor) {
-            this.mensagemSemSaldo(valorSaque, saldoAtual);
-        }
-        else {
-            this.setSaldo(novoSaldo);
-            this.mensagemSaqueProcessado(this.getNumeroDaConta(), valorSaque);
-            this.adicionaDebitos(debito);
-        }
-        return dataSaque;
-    }
-    calculaRendimentoMensal() {
-        Credito_js_1.default.creditos.forEach((elemento) => {
-            elemento.getValor() + elemento.getValor() * this.rentabilidadeMensal;
-        });
     }
 }
 exports.default = ContaPoupanca;
