@@ -117,7 +117,7 @@ SALDO
         Conta Poupança: ${ this.getNumeroDaConta() }
         Nome: ${ this.getCliente().getNome() }
         -----------------------------
-        Saldo atual de: R$ ${ this.getSaldo() }
+        Saldo atual de: R$ ${ this.getSaldo().toFixed(2) }
         `);
     }
 
