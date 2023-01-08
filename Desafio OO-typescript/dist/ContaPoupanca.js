@@ -46,17 +46,21 @@ class ContaPoupanca extends Conta_js_1.default {
     sacar(valor) {
         const debito = new Debito_js_1.default(valor, new Date());
         const dataSaque = debito.getData();
-        const numeroDaConta = this.getNumeroDaConta();
-        const valorSaque = debito.getValor();
         const saldoAtual = this.getSaldo();
-        const novoSaldo = saldoAtual - valorSaque;
+        let valorSaque = debito.getValor();
         if (this.getSaldo() < valor) {
             this.mensagemSemSaldo(valorSaque, saldoAtual);
         }
         else {
-            this.setSaldo(novoSaldo);
-            this.mensagemSaqueProcessado(numeroDaConta, valorSaque);
             this.adicionaDebitos(debito);
+            this.setSaldo(saldoAtual - debito.getValor());
+            this.mensagemSaqueProcessado(this.numeroDaConta, valor);
+            while (valor > this.creditos[0].getValor()) {
+                valorSaque -= this.creditos[0].getValor();
+                if (this.creditos[0].getValor() === 0) {
+                    this.creditos.shift();
+                }
+            }
         }
         return dataSaque;
     }
