@@ -39,9 +39,10 @@ export default class ContaPoupanca extends Conta {
 
         if (valor > 0) {
             this.adicionaCreditos(credito);
-            this.setSaldo(saldoAtual + valor + saldoAtual * this.rentabilidadeMensal);
+            /*this.setSaldo(saldoAtual + valor + saldoAtual * this.rentabilidadeMensal);*/
 
             this.mensagemDepositoProcessado(this.getNumeroDaConta(), valorDeposito);
+            this.calculaRendimentoMensal()
         }
         return dataDeposito;
     }
@@ -66,10 +67,17 @@ export default class ContaPoupanca extends Conta {
     }
 
     public calculaRendimentoMensal(): void {
-        Credito.creditos.forEach((elemento: Credito) => {
-            elemento.getValor() + (elemento.getValor() * this.rentabilidadeMensal);
+        let saldo = this.getSaldo()
+
+        this.creditos.forEach((elemento: Credito) => {
+            elemento.getData();
+            if (!this.getSaldo()) {
+                this.setSaldo(elemento.getValor())
+            } else {
+                this.setSaldo((elemento.getValor() + (elemento.getValor() * this.rentabilidadeMensal)) + saldo);
+            }
         });
-    }
+    };
 
     public mensagemSemSaldo(valor: number, saldoAtual: number) {
         console.log(`
@@ -109,7 +117,7 @@ SALDO
         Conta Poupança: ${ this.getNumeroDaConta() }
         Nome: ${ this.getCliente().getNome() }
         -----------------------------
-        Saldo atual de: R$ ${ this.getSaldo().toFixed(2) }
+        Saldo atual de: R$ ${ this.getSaldo() }
         `);
     }
 
