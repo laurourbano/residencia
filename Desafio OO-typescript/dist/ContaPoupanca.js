@@ -37,9 +37,8 @@ class ContaPoupanca extends Conta_js_1.default {
         const saldoAtual = this.getSaldo();
         if (valor > 0) {
             this.adicionaCreditos(credito);
-            this.setSaldo(saldoAtual + valor);
+            this.setSaldo(saldoAtual + this.calculaRendimentoMensal());
             this.mensagemDepositoProcessado(this.getNumeroDaConta(), valorDeposito);
-            this.calculaRendimentoMensal();
         }
         return dataDeposito;
     }
@@ -65,16 +64,17 @@ class ContaPoupanca extends Conta_js_1.default {
         return dataSaque;
     }
     calculaRendimentoMensal() {
-        let saldo = this.getSaldo();
         this.creditos.forEach((elemento) => {
             elemento.getData();
             if (!this.getSaldo()) {
                 this.setSaldo(elemento.getValor());
             }
             else {
-                this.setSaldo(((elemento.getValor() * this.rentabilidadeMensal)) + saldo);
+                let saldoAtual = this.getSaldo();
+                this.setSaldo(((elemento.getValor() + saldoAtual * this.rentabilidadeMensal)));
             }
         });
+        return this.getSaldo();
     }
     ;
     mensagemSemSaldo(valor, saldoAtual) {
