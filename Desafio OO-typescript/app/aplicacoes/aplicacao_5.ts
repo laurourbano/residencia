@@ -38,6 +38,4 @@ export function aplicacao_5(): void {
   conta5.mensagemSaldo();
   conta5.depositar(200).setFullYear(2022, 11, 1);
   conta5.mensagemSaldo();
-  conta5.calculaRendimentoMensal();
-
 }

@@ -37,7 +37,6 @@ function aplicacao_5() {
     conta5.mensagemSaldo();
     conta5.depositar(200).setFullYear(2022, 11, 1);
     conta5.mensagemSaldo();
-    conta5.calculaRendimentoMensal();
 }
 exports.aplicacao_5 = aplicacao_5;
 //# sourceMappingURL=aplicacao_5.js.map
