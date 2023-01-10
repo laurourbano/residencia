@@ -28,4 +28,8 @@ export function aplicacao_4(): void {
   conta2.transferir(conta3, 500);
   conta2.mensagemSaldo();
   conta3.mensagemSaldo();
+
+
+  //verificar
+  conta3.calcularSaldo();
 }
