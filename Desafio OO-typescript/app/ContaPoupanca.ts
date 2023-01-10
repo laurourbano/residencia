@@ -82,15 +82,14 @@ export default class ContaPoupanca extends Conta {
         return this.getSaldo()
     };
 
-/*
+
     public calcularSaldo(){
-        let creditos = [...this.creditos]
-        function addCreditos () {
-            return creditos.reduce((a, b) => a + b, 0)
+        const addCreditos =  () => {
+            return this.creditos.reduce(function(a:number, b:number) = a + b, 0)
           }
-          console.log(addCreditos(creditos))
+          console.log(addCreditos(...creditos))
     }
-*/
+
     public mensagemSemSaldo(valor: number, saldoAtual: number) {
         console.log(`
 ---------------------------------------
