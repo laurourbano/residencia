@@ -133,7 +133,7 @@ SALDO
         const novoSaldo = saldoAtual - valorSaque;
         const conta = this.getNumeroDaConta();
         let disponivel = saldoAtual + limite;
-        if (disponivel < debito.valor) {
+        if (disponivel < debito.getValor()) {
             this.mensagemSemSaldoSaque(valorSaque, saldoAtual);
         }
         else {
