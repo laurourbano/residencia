@@ -23,6 +23,8 @@ export function aplicacao_4(): void {
   const conta3 = new ContaPoupanca("003", cliente2);
   conta3.mensagemSaldo();
   conta3.depositar(1000);
+  conta3.depositar(1000);
+  conta3.depositar(1000);
   conta3.mensagemSaldo();
 
   conta2.transferir(conta3, 500);
@@ -31,5 +33,5 @@ export function aplicacao_4(): void {
 
 
   //verificar
-  conta3.calcularSaldo();
+  console.log(conta3.calcularSaldo());
 }

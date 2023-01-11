@@ -17,10 +17,13 @@ function aplicacao_4() {
     const conta3 = new ContaPoupanca_1.default("003", cliente2);
     conta3.mensagemSaldo();
     conta3.depositar(1000);
+    conta3.depositar(1000);
+    conta3.depositar(1000);
     conta3.mensagemSaldo();
     conta2.transferir(conta3, 500);
     conta2.mensagemSaldo();
     conta3.mensagemSaldo();
+    console.log(conta3.calcularSaldo());
 }
 exports.aplicacao_4 = aplicacao_4;
 //# sourceMappingURL=aplicacao_4.js.map
