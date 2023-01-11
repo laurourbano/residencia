@@ -76,20 +76,20 @@ export default class ContaPoupanca extends Conta {
                 this.setSaldo(elemento.getValor())
             } else {
                 let saldoAtual = this.getSaldo();
-                this.setSaldo(((elemento.getValor()  + saldoAtual * this.rentabilidadeMensal)));
+                this.setSaldo(((elemento.getValor() + saldoAtual * this.rentabilidadeMensal)));
             }
         });
         return this.getSaldo()
     };
 
 
-    public calcularSaldo(){
-        const addCreditos =  () => {
-            return this.creditos.values()
-          }
-          console.log(addCreditos())
+    public calcularSaldo() {
+        for (let i = 0; i < this.creditos.length; i++) {
+            let saldo = 0
+            return saldo += this.creditos[ i ].getValor()
+        }
+        console.log(this.creditos)
     }
-
     public mensagemSemSaldo(valor: number, saldoAtual: number) {
         console.log(`
 ---------------------------------------

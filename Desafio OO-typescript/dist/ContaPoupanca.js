@@ -77,6 +77,13 @@ class ContaPoupanca extends Conta_js_1.default {
         return this.getSaldo();
     }
     ;
+    calcularSaldo() {
+        for (let i = 0; i < this.creditos.length; i++) {
+            let saldo = 0;
+            return saldo += this.creditos[i].getValor();
+        }
+        console.log(this.creditos);
+    }
     mensagemSemSaldo(valor, saldoAtual) {
         console.log(`
 ---------------------------------------
